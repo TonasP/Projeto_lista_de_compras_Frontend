@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/TonasP/Projeto_lista_de_compras_Frontend/issues"
   },
-  "homepage": "https://github.com/TonasP/Projeto_lista_de_compras_Frontend#readme"
+  "homepage": "https://github.com/TonasP/Projeto_lista_de_compras_Frontend#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
 }
