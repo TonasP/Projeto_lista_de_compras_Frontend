@@ -1,0 +1,19 @@
+{
+  "name": "projeto_lista_de_compras_frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TonasP/Projeto_lista_de_compras_Frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TonasP/Projeto_lista_de_compras_Frontend/issues"
+  },
+  "homepage": "https://github.com/TonasP/Projeto_lista_de_compras_Frontend#readme"
+}
