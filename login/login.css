@@ -1,24 +1,123 @@
-html{
-    font-family: "Poppins", sans-serif;
-    color: #292929;
+:root{
+    --tipografia-cor: #292929;
+    --background-cor: #ebebeb;
+    --cor-primaria: #4c7a3e;
+    --cor-secundaria: #8ac77bd2;
+    --cor-terciaria: #0c6350;
 }
-.header{
+
+html {
+    font-family: "Poppins", sans-serif;
+    color: var(--tipografia-cor);
+    background-color: var(--background-cor);
+}
+
+.header {
     display: flex;
     flex-direction: row;
-    background-color: rgb(76, 122, 62);
+    background-color: var(--cor-primaria);
     width: 100%;
     align-items: center;
     box-shadow: 0px 0px 6px 0px #000000 inset;
 }
-.logo{
+
+.logo {
     width: 20%;
     margin-left: 5%;
 }
-.logo img{
+
+.logo img {
     width: 30%;
 }
-.title{
-  align-items: center;
-  margin: 0 15%;
-  font-size: 1.7vw;
+
+.title {
+    align-items: center;
+    margin: 0 17.5%;
+    font-size: 1.7vw;
+    cursor: ;
+}
+
+.dadoslogin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+    width: 100%;
+    height: 100%;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+    padding: 5%;
+    border: var(--tipografia-cor) 1px solid;
+    border-radius: 8px;
+    box-shadow: 0px 0px 4px 1px #636363;
+}
+
+.secaoInputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+}
+.secaoInputs div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    font-size: 1.5vw;
+}
+
+.secaoInputs input{
+    padding: 0;
+    border: none;
+    background: none;
+    background-color: var(--background-cor);
+    border: var(--tipografia-cor) solid 1px;
+    border-radius: 8px;
+    padding: 1em;
+    width: 15vw; 
+}
+.senha {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.esquecisenha {
+    padding: 0;
+    border: none;
+    background: none;
+    color: #5a5a5a;
+}
+.esquecisenha:hover{
+    color: var(--tipografia-cor);
+    cursor: pointer;
+}
+.funcoes{
+    display: flex;
+    gap: 1em;
+}
+.funcoes button{
+    padding: 0;
+    border: none;
+    background: none;
+    background-color: var(--cor-secundaria);
+    padding: 1.3em 2em;
+    border: var(--tipografia-cor) solid 1px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px #878787;
+    transition: .2s;
+}
+.funcoes button:hover{
+    transform: scale(1.05);
+    background-color: var(--cor-terciaria);
+    color: var(--background-cor);
+}
+
+.modal-overlay {
+    display: none;
 }
