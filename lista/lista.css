@@ -1,0 +1,37 @@
+:root{
+    --tipografia-cor: #292929;
+    --background-cor: #ebebeb;
+    --cor-primaria: #4c7a3e;
+    --cor-secundaria: #8ac77bd2;
+    --cor-terciaria: #0c6350;
+}
+
+html {
+    font-family: "Poppins", sans-serif;
+    color: var(--tipografia-cor);
+    background-color: var(--background-cor);
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--cor-primaria);
+    width: 100%;
+    align-items: center;
+    box-shadow: 0px 0px 6px 0px #000000 inset;
+}
+
+.logo {
+    width: 20%;
+    margin-left: 5%;
+}
+
+.logo img {
+    width: 30%;
+}
+
+.title {
+    align-items: center;
+    margin: 0 17.5%;
+    font-size: 1.7vw;
+}
