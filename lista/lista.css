@@ -1,4 +1,4 @@
-:root{
+:root {
     --tipografia-cor: #292929;
     --background-cor: #ebebeb;
     --cor-primaria: #4c7a3e;
@@ -10,6 +10,9 @@ html {
     font-family: "Poppins", sans-serif;
     color: var(--tipografia-cor);
     background-color: var(--background-cor);
+}
+.principal{
+    display: flex;
 }
 
 .header {
@@ -34,4 +37,78 @@ html {
     align-items: center;
     margin: 0 17.5%;
     font-size: 1.7vw;
+}
+
+.sidebar {
+    background-color: var(--cor-secundaria);
+    height: 64vh;
+    width: 12%;
+    padding: 5.7% 0;
+}
+
+.menus {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.menusTabelas ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-left: 10%;
+    font-size: 1vw;
+    font-weight: 400;
+} 
+
+.menusTabelas li {
+    border-radius: 8px;
+    padding: 10% 1px 10% 10%;
+    max-width: 75%;
+}
+.menusTabelas hr{
+    border: none;
+    height: 1px;
+    width: 90%;
+    background-color: #000000;
+    margin-left: .5%;
+}
+#atual{
+    background-color: var(--cor-terciaria);
+    box-shadow: 0px 0px 8px 0px #4e4e4e;
+}
+.usuarioSection{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-top: 7em;
+}
+.usuarioSection hr{
+    border: none;
+    background-color: #000000;
+    height: 1px;
+    width: 80%;
+}
+.infoUsuario{
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
+    gap: 5%;
+}
+.infoUsuario img{
+    width: 30%;
+}
+.emailUsuario{
+    margin-left: 13%;
+    font-size: .7vw;
+}
+.searchBar{
+    display: flex;
+    flex-direction: row;
+}
+.searchBar input{
+    border-radius: 24px;
+}
+.searchBar img{
+    width: 3%;
 }
