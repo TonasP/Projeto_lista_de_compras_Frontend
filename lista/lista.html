@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../utilities/validarToken.js"></script>
     <script src="lista.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,10 +26,10 @@
                 <h1>Lista de compras</h1>
             </div>
             <div class="buttonsConfirm">
-                <button class="add" id="btnAdd">Adicionar</button>
-                <button class="confirm" id="btnConfirm">Finalizar</button>
+                <button class="add" id="btnAdd" onclick="abrirModalAdicionar()">Adicionar</button>
+                <button class="confirm" id="btnConfirm" onclick="finalizarCompra()">Finalizar</button>
                 <button class="delete" id="btnDelete"><img src="../images/trashIcon.svg"
-                        alt="icone de deletar"></button>
+                        alt="icone de deletar" onclick="deletarItem()"></button>
             </div>
 
         </div>
@@ -60,16 +61,80 @@
             <div class="utilitarios">
                 <div class="searchBar">
                     <img src="../images/searchIcon.svg" alt="">
-                    <input type="text" placeholder="Pesquisar">
+                    <input type="text" id="inputBuscaLista" placeholder="Pesquisar" onkeyup="filtrarListaPrincipal()">
                 </div>
 
             </div>
             <div class="lista" id="lista">
-                
+
+            </div>
+            <div class="paginacao-container">
+                <button id="btnAnterior" class="btn-seta" onclick="mudarPagina(-1)"><img src="../images/less-than-svgrepo-com.svg" alt=""></button>
+
+                <div id="paginacaoBullets" class="bullets">
+                </div>
+
+                <button id="btnProximo" class="btn-seta" onclick="mudarPagina(1)"><img src="../images/greater-than-svgrepo-com.svg" alt=""></button>
             </div>
         </section>
 
     </section>
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2>Adicionar Itens</h2>
+                <button onclick="fecharModal()" class="btn-close">&times;</button>
+            </div>
+
+            <div id="telaSelecao">
+                <div class="search-bar-modal">
+                    <input type="text" id="inputBuscaCatalogo" placeholder="Buscar no catálogo..."
+                        onkeyup="filtrarCatalogo()">
+                </div>
+
+                <div class="catalogo-grid" id="gridCatalogo">
+                </div>
+
+                <div class="resumo-stage hidden" id="areaResumo">
+                    <h3>Itens prontos para adicionar (<span id="contadorStage">0</span>)</h3>
+                    <ul id="listaStage"></ul>
+                    <button onclick="salvarTudoNoBanco()" class="btn-finalizar-modal">Concluir e Salvar Lista</button>
+                </div>
+            </div>
+
+            <div id="telaConfiguracao" class="hidden">
+                <h3 id="nomeItemConfig">Nome do Item</h3>
+                <p class="categoria-badge" id="catItemConfig">Categoria</p>
+
+                <div class="form-group">
+                    <label>Quantidade</label>
+                    <div class="input-group">
+                        <input type="number" id="inputQtd" placeholder="Ex: 1">
+                        <select id="selectUnidade">
+                            <option value="un">unidades</option>
+                            <option value="kg">kg</option>
+                            <option value="g">gramas</option>
+                            <option value="l">litros</option>
+                            <option value="dz">dúzias</option>
+                            <option value="cx">caixa</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Observação (Opcional)</label>
+                    <textarea id="inputObs" rows="3" placeholder="Ex: Marca específica, maduro..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button onclick="voltarParaSelecao()" class="btn-secondary">Cancelar</button>
+                    <button onclick="confirmarItemNoStage()" class="btn-primary">Confirmar Item</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </body>
 
 </html>

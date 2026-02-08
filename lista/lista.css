@@ -78,23 +78,17 @@
         transition: .2s;
         
     }
-
+   
     .addFinalizar {
         background-color: var(--cor-secundaria);
         color: var(--tipografia-cor);
         cursor: pointer;
     }
-
-    .addFinalizar:hover {
+    .addFinalizar:hover,  .add:hover {
         transform: scale(1.05);
         background-color: var(--cor-terciaria);
         color: var(--background-cor);
-    }
-
-    .addFinalizar:hover {
-        transform: scale(1.05);
-        background-color: var(--cor-terciaria);
-        color: var(--background-cor);
+        cursor: pointer;
     }
 
     .delete {
@@ -116,7 +110,7 @@
         transition: .2s;
     }
 
-    .delete:hover {
+    .deleteMostrar:hover {
         transform: scale(1.05);
         background-color: #d33737;
     }
@@ -300,7 +294,7 @@
 
     .titulo {
         margin: 0;
-        margin-bottom: 1.5%;
+        margin-bottom: 2%;
     }
 
     .nome {
@@ -354,6 +348,148 @@
     .cardsChecked {
         background-color: #8ac77b7a;
     }
+
+ /* Overlay e Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 12px;
+    padding: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.hidden { display: none !important; }
+
+/* Grid do Catálogo */
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 Colunas */
+    gap: 10px;
+    margin: 15px 0;
+    max-height: 30vh; /* Scroll se tiver muitos itens */
+    overflow-y: auto;
+}
+
+.card-catalogo {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    background: #f9f9f9;
+}
+
+.card-catalogo:hover {
+    background: var(--cor-secundaria);
+    color: white;
+    border-color: var(--cor-primaria);
+}
+
+/* Área de Inputs */
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+.input-group input { flex: 1; padding: 8px; border-radius: 6px; border: 1px solid #ccc; }
+.input-group select { flex: 1; padding: 8px; border-radius: 6px; border: 1px solid #ccc; }
+
+textarea { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc; resize: none; margin-top: 5px;}
+
+/* Resumo (Stage) */
+.resumo-stage {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px dashed #ccc;
+}
+.resumo-stage ul { list-style: none; padding: 0; margin-bottom: 15px;}
+.resumo-stage li { 
+    background: #eee; 
+    margin-bottom: 5px; 
+    padding: 8px; 
+    border-radius: 4px;
+    display: flex; justify-content: space-between;
+}
+
+.btn-finalizar-modal {
+    width: 100%;
+    padding: 12px;
+    background: var(--cor-primaria);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+/* Container alinhado */
+.paginacao-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Espaço entre setas e bolinhas */
+    margin: 20px 0;
+}
+
+/* Estilo das Setas */
+.btn-seta {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #555;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-seta img{
+    width: 68%;
+}
+
+.btn-seta:hover:not(:disabled) {
+    background-color: #0c6350;
+    color: white;
+    border-color: #0c6350;
+}
+
+/* Quando o botão está desabilitado (ex: pag 1) */
+.btn-seta:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: #eee;
+}
+
+/* Mantendo o estilo das bolinhas (do passo anterior) */
+.bullets {
+    display: flex;
+    gap: 8px;
+}
+.bullet {
+    width: 10px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.bullet.ativo {
+    background-color: #0c6350;
+    transform: scale(1.3);
+}
 
 
 

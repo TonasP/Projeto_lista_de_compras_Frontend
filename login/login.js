@@ -22,7 +22,8 @@ async function fazerLogin() {
         const data = await response.json()
         if (data.token) {
             localStorage.setItem('tokenListaCompras', data.token)
-            alert("Logado com sucesso")
+            window.location.href='../lista/lista.html'
+
         }
         else {
             alert("Falha no login")
