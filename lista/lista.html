@@ -13,6 +13,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../cssreset.css">
     <link rel="stylesheet" href="lista.css">
+     <script src="../utilities/redirecionarPagina.js"></script>
     <title>Stock Lista</title>
 </head>
 
@@ -28,27 +29,26 @@
             <div class="buttonsConfirm">
                 <button class="add" id="btnAdd" onclick="abrirModalAdicionar()">Adicionar</button>
                 <button class="confirm" id="btnConfirm" onclick="finalizarCompra()">Finalizar</button>
-                <button class="delete" id="btnDelete"><img src="../images/trashIcon.svg"
-                        alt="icone de deletar" onclick="deletarItem()"></button>
+                <button class="delete" id="btnDelete" onclick="deletarItem()"><img src="../images/trashIcon.svg"
+                        alt="icone de deletar" ></button>
             </div>
 
         </div>
     </header>
     <section class="principal">
         <section class="sidebar">
-            <div class="menus">
-                <div class="menusTabelas">
+            <div class="menusTabelas">
                     <ul>
-                        <li id="atual">Lista</li>
+                        <li id="atual" onclick="redirecionarPagina('lista')"><a href="../lista/lista.html"></a>Lista</li>
 
-                        <li>Catalogo</li>
+                        <li  onclick="redirecionarPagina('catalogo')"> <a href="../catalogo/catalogo.html"></a>Catalogo</li>
 
-                        <li>Dicas</li>
+                        <li onclick="redirecionarPagina('dicas')" ><a href="../dicas/dicas.html"></a>Dicas</li>
 
-                        <li>Histórico</li>
+                        <li onclick="redirecionarPagina('historico')"><a href="../historico/historico.html"></a>Histórico</li>
                     </ul>
                 </div>
-                <div class="usuarioSection">
+                <div class="usuarioSection" onclick="redirecionarPagina('usuario')"> <a href="../usuario/usuario.html"></a>
                     <div class="infoUsuario">
                         <img src="../images/account.png" alt="Icone com foto do usuario">
                         <h3 id="nomeUsuario">Placeholder</h3>
