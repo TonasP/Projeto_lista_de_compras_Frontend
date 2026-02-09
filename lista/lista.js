@@ -11,8 +11,8 @@ let btnFinalizar = document.querySelector('.confirm')
 let catalogoCompleto = [];
 let itensParaAdicionar = [];
 let itemEmEdicao = null;
-document.addEventListener("DOMContentLoaded", () => {
-    const tokenValido = validarToken();
+document.addEventListener("DOMContentLoaded", async () => {
+    const tokenValido = await validarToken();
 
     if (tokenValido) {
         listarItems(1);
