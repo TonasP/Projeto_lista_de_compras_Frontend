@@ -39,7 +39,7 @@
     .title {
         white-space: nowrap;
         color: var(--background-cor);
-        margin-left: 10em;
+        margin-left: 12.5em;
         font-size: 1.7vw;
     }
 
@@ -48,7 +48,7 @@
         display: flex;
         position: absolute;
         top: 3%;
-        left: 70%;
+        left: 75%;
         align-items: center;
     }
 
@@ -121,14 +121,14 @@
     }
 
     .delete img {
-        width: 50%;
+        width: 69%;
     }
 
 
     .sidebar {
         background-color: var(--cor-secundaria);
         height: 64vh;
-        width: 11.5%;
+        width: 17.4%;
         padding: 5.7% 0;
     }
 
@@ -200,7 +200,7 @@
         height: 80%;
         width: 90%;
         margin-top: 2%;
-        margin-left: 5%;
+        margin-left: 7%;
         gap: 0 5%;
     }
     .utilitarios {
@@ -235,7 +235,8 @@
         flex-direction: row;
         background-color: #F2F2F2;
         width: 25%;
-        height: 35%;
+        height: 15%;
+        padding: 1% 2% 0 0;
         border-radius: 8px;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         transition: .2s;
@@ -248,14 +249,13 @@
     .lateral {
         display: flex;
         flex-direction: row;
-        height: 100%;
         align-items: center;
     }
 
     .lateral p {
         background-color: var(--cor-terciaria);
         width: .5em;
-        height: 80%;
+        height: 5vh;
         border-radius: 0px 6px 6px 0px;
     }
 
@@ -289,6 +289,8 @@
     .titulo {
         margin: 0;
         margin-bottom: 2%;
+        white-space: nowrap;
+
     }
 
     .nome {
@@ -341,4 +343,15 @@
 
     .cardsChecked {
         background-color: #8ac77b7a;
+    }
+     @keyframes surgimentoSuave {
+        from {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
     }

@@ -347,7 +347,7 @@ async function salvarTudoNoBanco() {
         fecharModal();
         listarItems();
     } catch (erro) {
-        console.error("Erro ao salvar itens", erro);
+        console.log("Erro ao salvar itens", erro.message);
         alert("Houve um erro ao salvar alguns itens.");
     }
 }
