@@ -63,6 +63,7 @@
                     <p id="emailUsuario" class="emailUsuario">placeholder@gmail.com</p>
                 </div>
             </div>
+            
         </section>
         <section class="sectionLista">
             <div class="utilitarios">
@@ -75,6 +76,92 @@
             <div class="lista" id="lista">
 
             </div>
+            <div class="paginacao-container">
+                <button id="btnAnterior" class="btn-seta" onclick="mudarPagina(-1)"><img
+                        src="../images/less-than-svgrepo-com.svg" alt=""></button>
+
+                <div id="paginacaoBullets" class="bullets">
+                </div>
+
+                <button id="btnProximo" class="btn-seta" onclick="mudarPagina(1)"><img
+                        src="../images/greater-than-svgrepo-com.svg" alt=""></button>
+            </div>
+            <div id="modalCatalogo" class="modal-overlay hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Novo Produto</h2>
+            <button onclick="fecharModalCatalogo()" class="btn-close">&times;</button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Nome do Produto</label>
+                <input type="text" id="inputNomeProduto" placeholder="Ex: Detergente, Maçã...">
+            </div>
+
+            <div class="form-group">
+                <label>Categoria</label>
+                <select id="selectCategoria">
+                    <option value="Outros">📦 Outros / Geral</option>
+
+        <optgroup label="🖥️ Tecnologia & Eletrônicos">
+            <option value="Hardware">Hardware PC (GPU, CPU, RAM)</option>
+            <option value="Perifericos">Periféricos (Teclado, Mouse)</option>
+            <option value="Cabos">Cabos, Fontes e Adaptadores</option>
+            <option value="Audio">Áudio e Vídeo</option>
+            <option value="Celulares">Celulares e Acessórios</option>
+            <option value="Eletronica">Componentes Eletrônicos</option>
+        </optgroup>
+
+        <optgroup label="🛠️ Ferramentas & Oficina">
+            <option value="Ferramentas Manuais">Ferramentas Manuais</option>
+            <option value="Ferramentas Eletricas">Ferramentas Elétricas</option>
+            <option value="Ferragens">Ferragens (Parafusos, Pregos)</option>
+            <option value="Madeiras">Madeiras e Chapas</option>
+            <option value="Acabamento">Tintas e Acabamento</option>
+            <option value="EPI">EPI e Segurança</option>
+        </optgroup>
+
+        <optgroup label="🏠 Casa & Mercado">
+            <option value="Alimentacao">Alimentação Geral</option>
+            <option value="Limpeza">Limpeza e Lavanderia</option>
+            <option value="Cozinha">Utensílios de Cozinha</option>
+            <option value="Organizacao">Caixas e Organização</option>
+            <option value="Decoracao">Decoração</option>
+        </optgroup>
+
+        <optgroup label="✏️ Escritório & Estudos">
+            <option value="Papelaria">Papelaria e Escrita</option>
+            <option value="Impressao">Impressão e Papéis</option>
+            <option value="Livros">Livros e Cadernos</option>
+        </optgroup>
+
+        <optgroup label="🎨 Hobbies & Lazer">
+            <option value="Fotografia">Fotografia</option>
+            <option value="Cutelaria">Cutelaria</option>
+            <option value="Automotivo">Automotivo</option>
+            <option value="Camping">Camping e Pesca</option>
+            <option value="Games">Jogos e Consoles</option>
+        </optgroup>
+                </select>
+            </div>
+
+            <div class="modal-actions">
+                <button onclick="adicionarAoStageCatalogo()" class="btn-primary">Adicionar à Lista (+)</button>
+            </div>
+
+            <div id="areaResumoCatalogo" class="resumo-stage hidden">
+                <hr>
+                <h3>Itens a Salvar (<span id="contadorStageCatalogo">0</span>)</h3>
+                <ul id="listaStageCatalogo">
+                    </ul>
+                <div class="modal-actions">
+                    <button onclick="salvarTudoNoCatalogo()" class="btn-finalizar-modal">Salvar Tudo no Banco</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 

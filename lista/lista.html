@@ -13,7 +13,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../cssreset.css">
     <link rel="stylesheet" href="lista.css">
-     <script src="../utilities/redirecionarPagina.js"></script>
+    <script src="../utilities/redirecionarPagina.js"></script>
     <title>Stock Lista</title>
 </head>
 
@@ -30,7 +30,7 @@
                 <button class="add" id="btnAdd" onclick="abrirModalAdicionar()">Adicionar</button>
                 <button class="confirm" id="btnConfirm" onclick="finalizarCompra()">Finalizar</button>
                 <button class="delete" id="btnDelete" onclick="deletarItem()"><img src="../images/trashIcon.svg"
-                        alt="icone de deletar" ></button>
+                        alt="icone de deletar"></button>
             </div>
 
         </div>
@@ -38,23 +38,24 @@
     <section class="principal">
         <section class="sidebar">
             <div class="menusTabelas">
-                    <ul>
-                        <li id="atual" onclick="redirecionarPagina('lista')"><a href="../lista/lista.html"></a>Lista</li>
+                <ul>
+                    <li id="atual" onclick="redirecionarPagina('lista')"><a href="../lista/lista.html"></a>Lista</li>
 
-                        <li  onclick="redirecionarPagina('catalogo')"> <a href="../catalogo/catalogo.html"></a>Catalogo</li>
+                    <li onclick="redirecionarPagina('catalogo')"> <a href="../catalogo/catalogo.html"></a>Catalogo</li>
 
-                        <li onclick="redirecionarPagina('dicas')" ><a href="../dicas/dicas.html"></a>Dicas</li>
+                    <li onclick="redirecionarPagina('dicas')"><a href="../dicas/dicas.html"></a>Dicas</li>
 
-                        <li onclick="redirecionarPagina('historico')"><a href="../historico/historico.html"></a>Histórico</li>
-                    </ul>
+                    <li onclick="redirecionarPagina('historico')"><a href="../historico/historico.html"></a>Histórico
+                    </li>
+                </ul>
+            </div>
+            <div class="usuarioSection" onclick="redirecionarPagina('usuario')"> <a href="../usuario/usuario.html"></a>
+                <div class="infoUsuario">
+                    <img src="../images/account.png" alt="Icone com foto do usuario">
+                    <h3 id="nomeUsuario">Placeholder</h3>
                 </div>
-                <div class="usuarioSection" onclick="redirecionarPagina('usuario')"> <a href="../usuario/usuario.html"></a>
-                    <div class="infoUsuario">
-                        <img src="../images/account.png" alt="Icone com foto do usuario">
-                        <h3 id="nomeUsuario">Placeholder</h3>
-                    </div>
-                    <p id="emailUsuario" class="emailUsuario">placeholder@gmail.com</p>
-                </div>
+                <p id="emailUsuario" class="emailUsuario">placeholder@gmail.com</p>
+            </div>
             </div>
         </section>
         <section class="sectionLista">
@@ -69,12 +70,14 @@
 
             </div>
             <div class="paginacao-container">
-                <button id="btnAnterior" class="btn-seta" onclick="mudarPagina(-1)"><img src="../images/less-than-svgrepo-com.svg" alt=""></button>
+                <button id="btnAnterior" class="btn-seta" onclick="mudarPagina(-1)"><img
+                        src="../images/less-than-svgrepo-com.svg" alt=""></button>
 
                 <div id="paginacaoBullets" class="bullets">
                 </div>
 
-                <button id="btnProximo" class="btn-seta" onclick="mudarPagina(1)"><img src="../images/greater-than-svgrepo-com.svg" alt=""></button>
+                <button id="btnProximo" class="btn-seta" onclick="mudarPagina(1)"><img
+                        src="../images/greater-than-svgrepo-com.svg" alt=""></button>
             </div>
         </section>
 

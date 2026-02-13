@@ -188,24 +188,24 @@ function acionarBtnDeleteEAdd() {
         btnFinalizar.classList.remove('addFinalizar')
     }
 }
-// 1. Abrir Modal e Carregar Catálogo
+
 async function abrirModalAdicionar() {
     const modal = document.getElementById('modalOverlay');
     modal.classList.remove('hidden');
 
-    // Limpa estados anteriores
+    
     itensParaAdicionar = [];
     atualizarResumoStage();
     voltarParaSelecao();
 
     try {
         const token = localStorage.getItem('tokenListaCompras');
-        // ATENÇÃO: Verifique se sua rota de catálogo é essa
+        
         const response = await fetch(`${API}/catalogo`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         catalogoCompleto = await response.json();
-        renderizarCatalogo(catalogoCompleto);
+        renderizarCatalogo(catalogoCompleto.itens);
     } catch (erro) {
         console.error("Erro ao buscar catálogo", erro);
         alert("Erro ao carregar itens do catálogo.");
@@ -216,7 +216,7 @@ function fecharModal() {
     document.getElementById('modalOverlay').classList.add('hidden');
 }
 
-// 2. Renderizar os Cards (2 Colunas)
+
 function renderizarCatalogo(lista) {
     const grid = document.getElementById('gridCatalogo');
     grid.innerHTML = '';
@@ -228,13 +228,12 @@ function renderizarCatalogo(lista) {
             <strong>${item.nome}</strong><br>
             <small>${item.categoria}</small>
         `;
-        // Ao clicar, vai para a tela de configuração
+       
         card.onclick = () => abrirTelaConfiguracao(item);
         grid.appendChild(card);
     });
 }
 
-// 3. Filtro de Pesquisa
 function filtrarCatalogo() {
     const termo = document.getElementById('inputBuscaCatalogo').value.toLowerCase();
     const filtrados = catalogoCompleto.filter(item =>
@@ -244,17 +243,17 @@ function filtrarCatalogo() {
     renderizarCatalogo(filtrados);
 }
 
-// 4. Fluxo de Seleção -> Configuração
+
 function abrirTelaConfiguracao(item) {
     itemEmEdicao = item;
 
-    // Preenche a tela 2
+    
     document.getElementById('nomeItemConfig').innerText = item.nome;
     document.getElementById('catItemConfig').innerText = item.categoria;
     document.getElementById('inputQtd').value = '';
     document.getElementById('inputObs').value = '';
 
-    // Troca as telas
+    
     document.getElementById('telaSelecao').classList.add('hidden');
     document.getElementById('telaConfiguracao').classList.remove('hidden');
 }
@@ -265,7 +264,7 @@ function voltarParaSelecao() {
     itemEmEdicao = null;
 }
 
-// 5. Adicionar ao Array Temporário (Stage)
+
 function confirmarItemNoStage() {
     const qtdValor = document.getElementById('inputQtd').value;
     const unidade = document.getElementById('selectUnidade').value;
@@ -276,11 +275,11 @@ function confirmarItemNoStage() {
         return;
     }
 
-    // Cria o objeto do item configurado
+   
     const novoItem = {
-        produto_id: itemEmEdicao.id, // ID do catálogo
-        nome: itemEmEdicao.nome,     // Apenas para mostrar no resumo
-        quantidade: `${qtdValor}${unidade}`, // Ex: "500g" ou "2un"
+        produto_id: itemEmEdicao.id, 
+        nome: itemEmEdicao.nome,     
+        quantidade: `${qtdValor}${unidade}`, 
         comentario: obs
     };
 
@@ -290,7 +289,7 @@ function confirmarItemNoStage() {
     voltarParaSelecao();
 }
 
-// 6. Atualiza a lista visual do resumo
+
 function atualizarResumoStage() {
     const areaResumo = document.getElementById('areaResumo');
     const lista = document.getElementById('listaStage');
@@ -320,12 +319,10 @@ function removerDoStage(index) {
     atualizarResumoStage();
 }
 
-// 7. FINALMENTE: Enviar tudo para o Backend
 async function salvarTudoNoBanco() {
     const token = localStorage.getItem('tokenListaCompras');
 
-    // Promessa de inserir todos de uma vez
-    // O Promise.all roda todos os fetchs em paralelo
+    
     const promessas = itensParaAdicionar.map(item => {
         return fetch(`${API}/lista`, {
             method: 'POST',
