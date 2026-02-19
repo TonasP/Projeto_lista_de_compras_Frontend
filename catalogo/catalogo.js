@@ -259,7 +259,7 @@ function atualizarResumoStageCatalogo() {
             listaHtml.innerHTML += `
                 <li>
                     <span><strong>${item.nome}</strong> (${item.categoria})</span>
-                    <button onclick="removerDoStageCatalogo(${index})" style="color:red; border:none; background:none; cursor:pointer; font-weight:bold;">&times;</button>
+                    <button onclick="removerDoStageCatalogo(${index})" style="font-size:2vh ;color:red; border:none; background:none; cursor:pointer; font-weight:bold;">&times;</button>
                 </li>
             `;
         });
