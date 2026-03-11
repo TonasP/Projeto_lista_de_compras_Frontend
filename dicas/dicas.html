@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../utilities/validarToken.js"></script>
+    <script src="dicas.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -14,6 +16,7 @@
     <script src="../utilities/redirecionarPagina.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <header>
         <div class="header">
@@ -25,7 +28,7 @@
             </div>
             <div class="buttonsConfirm">
                 <button class="add" id="btnAdd" onclick="abrirModalAdicionar()">Adicionar</button>
-               
+
                 <button class="delete" id="btnDelete" onclick="deletarItem()"><img src="../images/trashIcon.svg"
                         alt="icone de deletar"></button>
             </div>
@@ -36,7 +39,7 @@
         <section class="sidebar">
             <div class="menusTabelas">
                 <ul>
-                    <li  onclick="redirecionarPagina('lista')"><a href="../lista/lista.html"></a>Lista</li>
+                    <li onclick="redirecionarPagina('lista')"><a href="../lista/lista.html"></a>Lista</li>
 
                     <li onclick="redirecionarPagina('catalogo')"> <a href="../catalogo/catalogo.html"></a>Catalogo</li>
 
@@ -64,33 +67,7 @@
 
             </div>
             <div class="lista" id="lista">
-                    <div class="cards" id="card-${idReal}" 
-             data-id="${idReal}" 
-             data-produtoid="${itens.produto_id}" 
-             data-nome="${itens.produto_nome}"
-             data-categoria="${itens.produto_categoria}"
-             data-quantidade="${itens.quantidade}"
-             data-comentario="${comentario}">
-                    <div class="lateral" id="lateral">
-                        <p class="decoracaoLateral"></p>
-                    </div>
-                    <div class="checkboxCard" id="checkboxCard">
-                        <input type="checkbox" class="checkbox">
-                    </div>
-                    <div class="meio">
-                        <div class="topoInfos">
-                            <div class="titulo">
-                                <h2 id="nome" class="nome">Dica</h1>
-                            </div>
-                            <div id="infos" class="infos">
-                                <p id="quantia" class="quantia">Item massa</p>
-                            </div>
-                        </div>
-                        <div class="descricao" id="descricao">
-                            <p>Esse item no mercado Dia está mais barato e tem mais variedades</p>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div class="paginacao-container">
                 <button id="btnAnterior" class="btn-seta" onclick="mudarPagina(-1)"><img
@@ -105,5 +82,38 @@
         </section>
 
     </section>
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2>Adicionar Nova Dica</h2>
+                <button onclick="fecharModal()" class="btn-close">&times;</button>
+            </div>
+
+            <div id="telaConfiguracao">
+                <div class="form-group">
+                    <label>Título da Dica</label>
+                    <input type="text" id="inputTituloDica" placeholder="Ex: Mercado Dia tá barato">
+                </div>
+
+                <div class="form-group">
+                    <label>Produto Relacionado (Nome)</label>
+                    <input type="text" id="inputProdutoDica" placeholder="Ex: Arroz branco">
+                </div>
+
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea id="inputDescricaoDica" rows="4" placeholder="Ex: O pacote de 5kg está saindo por R$ 20,00..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button onclick="fecharModal()" class="btn-secondary">Cancelar</button>
+                    <button onclick="salvarDica()" class="btn-primary">Salvar Dica</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </body>
+
 </html>
