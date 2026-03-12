@@ -121,8 +121,7 @@ function mudarPagina(delta) {
     listarItems(novaPagina);
 }
 async function criarCard(itens) {
-    // Pegamos as propriedades do banco. 
-    // OBS: Ajuste 'itens.titulo', 'itens.produto_nome' e 'itens.descricao' se os nomes das colunas no seu banco de dados forem diferentes!
+    
     const idReal = itens.id;
     const titulo = itens.titulo || "Dica Sem Título";
     const produtoNome = itens.produto_nome || "Sem item relacionado";
@@ -240,4 +239,35 @@ function acionarBtnDeleteEAdd() {
         btnDeletar.classList.remove('deleteMostrar')
         btnFinalizar.classList.remove('addFinalizar')
     }
+}
+
+function pegarItensSelecionados() {
+    const cardsMarcados = document.querySelectorAll('.cardsChecked'); // Corrigido o ponto
+
+    return Array.from(cardsMarcados).map(card => ({
+        id: card.dataset.id,              // ID da Lista (para a URL)
+        dica_id: card.dataset.idReal, // ID do Produto (para o Body)
+        titulo: card.dataset.titulo,
+        produtoNome: card.dataset.produtoNome,
+        descricao: card.dataset.descricao
+    }));
+}
+
+async function deletarItem() {
+    const cards = pegarItensSelecionados()
+    const ids = cards.map(item => item.id);
+    const token = localStorage.getItem('tokenListaCompras')
+    if (ids.length === 0) {
+        alert("Nenhum item selecionado")
+        return
+    }
+    if (!confirm(`Tem certeza que deseja deletar ${ids.length} itens`)) return
+
+    for (const id of ids) {
+        await fetch(`${API}/dicas/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+        })
+    }
+    listarItems(paginaAtual)
 }

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historico</title>
+    <script src="../utilities/validarToken.js"></script>
+    <script src="historico.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../cssreset.css">
+    <link rel="stylesheet" href="historico.css">
+    <script src="../utilities/redirecionarPagina.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <img src="../images/StockLogo.png" alt="Logo da Stock lista">
+            </div>
+            <div class="title">
+                <h1>Dicas</h1>
+            </div>
+            <div class="buttonsConfirm">
+                <button class="add" id="btnAdd" onclick="abrirModalAdicionar()">Adicionar</button>
+
+                <button class="delete" id="btnDelete" onclick="deletarItem()"><img src="../images/trashIcon.svg"
+                        alt="icone de deletar"></button>
+            </div>
+
+        </div>
+    </header>
+    <section class="principal">
+        <section class="sidebar">
+            <div class="menusTabelas">
+                <ul>
+                    <li onclick="redirecionarPagina('lista')"><a href="../lista/lista.html"></a>Lista</li>
+
+                    <li onclick="redirecionarPagina('catalogo')"> <a href="../catalogo/catalogo.html"></a>Catalogo</li>
+
+                    <li id="atual" onclick="redirecionarPagina('dicas')"><a href="../dicas/dicas.html"></a>Dicas</li>
+
+                    <li onclick="redirecionarPagina('historico')"><a href="../historico/historico.html"></a>Histórico
+                    </li>
+                </ul>
+            </div>
+            <div class="usuarioSection" onclick="redirecionarPagina('usuario')"> <a href="../usuario/usuario.html"></a>
+                <div class="infoUsuario">
+                    <img src="../images/account.png" alt="Icone com foto do usuario">
+                    <h3 id="nomeUsuario">Placeholder</h3>
+                </div>
+                <p id="emailUsuario" class="emailUsuario">placeholder@gmail.com</p>
+            </div>
+            </div>
+        </section>
+        <section class="sectionLista">
+            <div class="utilitarios">
+                <div class="searchBar">
+                    <img src="../images/searchIcon.svg" alt="">
+                    <input type="text" id="inputBuscaLista" placeholder="Pesquisar" onkeyup="filtrarListaPrincipal()">
+                </div>
+
+            </div>
+            <div class="lista" id="lista">
+                <div class="dashboard-container" style="padding: 20px; width: 80%;">
+    
+    <div class="filtros" style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+        <h3>Consumo de Itens</h3>
+        <select id="filtroTempo" onchange="carregarGraficoPrincipal()">
+            <option value="hoje">Hoje</option>
+            <option value="1-semana">Última Semana</option>
+            <option value="3-semanas">Últimas 3 Semanas</option>
+            <option value="1-mes" selected>Último Mês</option>
+            <option value="3-meses">Últimos 3 Meses</option>
+            <option value="6-meses">Últimos 6 Meses</option>
+            <option value="1-ano">Último Ano</option>
+        </select>
+    </div>
+
+    <div id="graficoPrincipal" style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></div>
+
+    <div id="areaDetalhes" class="hidden" style="margin-top: 30px; background: white; padding: 20px; border-radius: 8px;">
+        <h3 id="tituloDetalheProduto" style="color: var(--cor-terciaria);">Detalhes do Produto</h3>
+        <ul id="listaDetalhesUnidades"></ul>
+    </div>
+
+</div>
+            </div>
+            <div class="paginacao-container">
+                <button id="btnAnterior" class="btn-seta" onclick="mudarPagina(-1)"><img
+                        src="../images/less-than-svgrepo-com.svg" alt=""></button>
+
+                <div id="paginacaoBullets" class="bullets">
+                </div>
+
+                <button id="btnProximo" class="btn-seta" onclick="mudarPagina(1)"><img
+                        src="../images/greater-than-svgrepo-com.svg" alt=""></button>
+            </div>
+        </section>
+
+    </section>
+</body>
+</html>
