@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (tokenValido) {
         listarItems(1);
         selectCard()
+        sectionUsuario()
     }
 })
 
@@ -24,35 +25,32 @@ async function listarItems(pagina) {
     paginaAtual = pagina;
     const offset = (pagina - 1) * limit;
 
-    // --- MUDANÇA DE SEGURANÇA AQUI ---
-    // Tenta pegar o elemento
+
     const inputBusca = document.getElementById('inputBuscaLista');
     
-    // Se o elemento existir, pega o valor. Se não existir, usa vazio ""
-    // Isso evita o erro "Cannot read property 'value' of null"
+   
     const termoBusca = inputBusca ? inputBusca.value : ""; 
-    // ----------------------------------
+    
 
     try {
         const token = localStorage.getItem('tokenListaCompras');
         
         let url = `${API}/lista?limit=${limit}&offset=${offset}`;
         
-        // Só adiciona na URL se tiver algo escrito
+       
         if (termoBusca) {
             url += `&busca=${encodeURIComponent(termoBusca)}`;
         }
 
-        console.log("Buscando URL:", url); // <--- OLHE ISSO NO CONSOLE (F12)
 
         const response = await fetch(url, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
-        // Verificação de Token Expirado (Importante!)
+        
         if (response.status === 401 || response.status === 403) {
              console.warn("Sessão expirada");
-             // window.location.href = "../login/index.html"; // Descomente se quiser redirecionar
+             
              return;
         }
 
@@ -82,7 +80,7 @@ async function listarItems(pagina) {
 }
 
 function filtrarListaPrincipal() {
-    // Quando pesquisamos, sempre voltamos para a primeira página
+    
     listarItems(1);
 }
 
@@ -157,6 +155,22 @@ async function criarCard(itens) {
                     </div>
                 </div>
         `
+}
+function sectionUsuario(){
+    const token = localStorage.getItem('tokenListaCompras')
+    let userInfo = fetch(`${API}/usuario/me`,{
+        headers: { 'Authorization': `Bearer ${token}` 
+    }})
+
+    const usuarioSection = document.getElementById('usuarioSection')
+    usuarioSection.innerHTML +=
+    `
+    <div class="infoUsuario">
+                    <img src="../images/account.png" alt="Icone com foto do usuario">
+                    <h3 id="nomeUsuario">${userInfo.nome}</h3>
+                </div>
+                <p id="emailUsuario" class="emailUsuario">${userInfo.email}</p>
+    `
 }
 function selectCard() {
     const listagem = document.getElementById('lista');

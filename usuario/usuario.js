@@ -1,0 +1,78 @@
+async function inicializarModalUsuario() {
+    try {
+        // Busca o fragmento HTML (Ajuste o caminho '../usuario/' se necessário)
+        const response = await fetch('../usuario/usuario.html');
+        const html = await response.text();
+        
+        // Injeta no final do body da página atual
+        document.body.insertAdjacentHTML('beforeend', html);
+    } catch (erro) {
+        console.error("Erro ao carregar o modal de usuário:", erro);
+    }
+}
+
+// Chamar a injeção assim que o script for carregado
+document.addEventListener("DOMContentLoaded", () => {
+    inicializarModalUsuario();
+});
+
+// ==========================================
+// CONTROLES DO MODAL
+// ==========================================
+function abrirModalUsuario() {
+    const modal = document.getElementById('modalUsuarioOverlay');
+    if (modal) {
+        modal.classList.remove('hidden');
+        // Opcional: Aqui você pode chamar a rota GET /usuarios/me para preencher nome e email
+    }
+}
+
+function fecharModalUsuario() {
+    const modal = document.getElementById('modalUsuarioOverlay');
+    if (modal) {
+        modal.classList.add('hidden');
+    }
+}
+
+function fazerLogout() {
+    localStorage.removeItem('tokenListaCompras');
+    window.location.href = "../login/index.html"; // Redireciona pro login
+}
+
+// ==========================================
+// LÓGICA DE UPLOAD DE FOTO (A mesma que fizemos antes)
+// ==========================================
+async function salvarNovaFotoModal() {
+    const fileInput = document.getElementById('inputFotoModal');
+    const token = localStorage.getItem('tokenListaCompras');
+
+    if (fileInput.files.length === 0) return;
+
+    const arquivoImagem = fileInput.files[0];
+    const formData = new FormData();
+    formData.append("foto", arquivoImagem); 
+
+    try {
+        // O 'API' precisa estar definido globalmente na sua página (const API = "http://127.0.0.1:3000")
+        const response = await fetch(`${API}/usuario/upload-foto`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` },
+            body: formData
+        });
+
+        if (response.ok) {
+            const dados = await response.json();
+            // Atualiza a imagem no modal e na barra lateral (se existir)
+            document.getElementById('imgPerfilModal').src = `${API}${dados.fotoUrl}`;
+            
+            const imgSidebar = document.querySelector('.infoUsuario img');
+            if (imgSidebar) imgSidebar.src = `${API}${dados.fotoUrl}`;
+            
+            alert("Foto atualizada!");
+        } else {
+            alert("Erro ao salvar a foto.");
+        }
+    } catch (erro) {
+        console.error("Erro na requisição:", erro);
+    }
+}

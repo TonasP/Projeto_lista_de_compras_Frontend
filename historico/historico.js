@@ -1,6 +1,6 @@
 const API = "http://127.0.0.1:3000"
 
-let chartPrincipal; // Variável global para guardar a instância do gráfico
+let chartPrincipal; 
 
 document.addEventListener("DOMContentLoaded", async () => {
     const tokenValido = await validarToken();
@@ -11,18 +11,35 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function carregarGraficoPrincipal() {
     const tempo = document.getElementById('filtroTempo').value;
+
+
+    const inputBusca = document.getElementById('inputBuscaLista');
+    const termoBusca = inputBusca ? inputBusca.value : "";
+
     const token = localStorage.getItem('tokenListaCompras');
-    
-    // Esconde os detalhes sempre que mudar o filtro
+
     document.getElementById('areaDetalhes').classList.add('hidden');
 
     try {
-        const response = await fetch(`${API}/historico/consumo?tempo=${tempo}`, {
+       
+        let url = `${API}/historico/consumo?tempo=${tempo}`;
+
+    
+        if (termoBusca) {
+            url += `&busca=${encodeURIComponent(termoBusca)}`;
+        }
+
+        const response = await fetch(url, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
+
+        if (!response.ok) {
+            console.error(`Erro da API: Status ${response.status}`);
+            return;
+        }
+
         const dados = await response.json();
 
-        // Prepara os arrays para o gráfico
         const nomesProdutos = dados.map(item => item.produto_nome);
         const totais = dados.map(item => parseInt(item.total_vezes_comprado));
 
@@ -34,10 +51,10 @@ async function carregarGraficoPrincipal() {
 
 function renderizarGrafico(categorias, seriesData, tempoFiltro) {
     const divGrafico = document.getElementById('graficoPrincipal');
-    divGrafico.innerHTML = ''; // Limpa antes de redesenhar
-    
+    divGrafico.innerHTML = ''; 
+
     if (chartPrincipal) {
-        chartPrincipal.destroy(); // Destroi o antigo se existir
+        chartPrincipal.destroy(); 
     }
 
     const options = {
@@ -50,15 +67,15 @@ function renderizarGrafico(categorias, seriesData, tempoFiltro) {
             height: 350,
             fontFamily: 'Poppins, sans-serif',
             events: {
-                // AQUI É A MÁGICA DO CLIQUE NA BARRA
-                dataPointSelection: function(event, chartContext, config) {
+               
+                dataPointSelection: function (event, chartContext, config) {
                     const indexClicado = config.dataPointIndex;
                     const nomeProdutoClicado = categorias[indexClicado];
                     buscarDetalhesProduto(nomeProdutoClicado, tempoFiltro);
                 }
             }
         },
-        colors: ['#4c7a3e'], // Sua cor primária
+        colors: ['#4c7a3e'], 
         plotOptions: {
             bar: {
                 borderRadius: 4,
@@ -79,7 +96,7 @@ function renderizarGrafico(categorias, seriesData, tempoFiltro) {
 
 async function buscarDetalhesProduto(produtoNome, tempo) {
     const token = localStorage.getItem('tokenListaCompras');
-    
+
     try {
         const response = await fetch(`${API}/historico/detalhes/${encodeURIComponent(produtoNome)}?tempo=${tempo}`, {
             headers: { 'Authorization': `Bearer ${token}` }
@@ -102,7 +119,7 @@ async function buscarDetalhesProduto(produtoNome, tempo) {
         if (detalhes.length === 0) {
             lista.innerHTML = '<li>Nenhum detalhe encontrado.</li>';
         } else {
-            // Renderiza a soma separada por categoria de unidade
+           
             detalhes.forEach(item => {
                 if (item.unidade === 'diversos') {
                     lista.innerHTML += `

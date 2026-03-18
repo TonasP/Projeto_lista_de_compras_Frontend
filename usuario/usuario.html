@@ -1,0 +1,27 @@
+<div id="modalUsuarioOverlay" class="modal-usuario-overlay hidden">
+    <div class="modal-usuario-content">
+        
+        <div class="modal-usuario-header">
+            <h2>Meu Perfil</h2>
+            <button onclick="fecharModalUsuario()" class="btn-close-usuario">&times;</button>
+        </div>
+
+        <div class="modal-usuario-body">
+            <div class="perfil-foto-container">
+                <img id="imgPerfilModal" src="../images/account.png" alt="Sua foto de perfil">
+                <label for="inputFotoModal" class="btn-alterar-foto">Mudar Foto</label>
+                <input type="file" id="inputFotoModal" accept="image/png, image/jpeg" style="display:none;" onchange="salvarNovaFotoModal()">
+            </div>
+
+            <div class="perfil-infos">
+                <p><strong>Nome:</strong> <span id="modalNomeUsuario">Carregando...</span></p>
+                <p><strong>E-mail:</strong> <span id="modalEmailUsuario">Carregando...</span></p>
+            </div>
+        </div>
+
+        <div class="modal-usuario-footer">
+            <button onclick="fazerLogout()" class="btn-logout">Sair da Conta</button>
+        </div>
+
+    </div>
+</div>
