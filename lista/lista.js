@@ -1,3 +1,5 @@
+
+
 const API = "http://127.0.0.1:3000"
 
 let paginaAtual = 1
@@ -156,20 +158,24 @@ async function criarCard(itens) {
                 </div>
         `
 }
-function sectionUsuario(){
+async function sectionUsuario(){
     const token = localStorage.getItem('tokenListaCompras')
-    let userInfo = fetch(`${API}/usuario/me`,{
+    let response = await fetch(`${API}/usuario/me`,{
         headers: { 'Authorization': `Bearer ${token}` 
     }})
-
+    let dadosUsuario = await response.json()
+    console.log(dadosUsuario)
     const usuarioSection = document.getElementById('usuarioSection')
+    const caminhoDaImagem = dadosUsuario.foto_perfil 
+            ? `${API}${dadosUsuario.foto_perfil}` 
+            : "../images/account.png";
     usuarioSection.innerHTML +=
     `
     <div class="infoUsuario">
-                    <img src="../images/account.png" alt="Icone com foto do usuario">
-                    <h3 id="nomeUsuario">${userInfo.nome}</h3>
+                    <img src="${caminhoDaImagem}" alt="Icone com foto do usuario">
+                    <h3 id="nomeUsuario">${dadosUsuario.usuario}</h3>
                 </div>
-                <p id="emailUsuario" class="emailUsuario">${userInfo.email}</p>
+                <p id="emailUsuario" class="emailUsuario">${dadosUsuario.email}</p>
     `
 }
 function selectCard() {
