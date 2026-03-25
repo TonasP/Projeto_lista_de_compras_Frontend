@@ -126,10 +126,14 @@
 
 
     .sidebar {
-        background-color: var(--cor-secundaria);
-        height: 64vh;
-        width: 12%;
-        padding: 5.7% 0;
+      background-color: var(--cor-secundaria);
+       height: 64vh;
+       width: 12.8em;
+       padding: 5.7% 0;
+       min-width: 12.8em;
+       max-width: 12.8em;
+       /* Garante que nunca será menor que 24em */
+       flex-shrink: 0
     }
 
     .menus {
