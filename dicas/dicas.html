@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../cssreset.css">
     <link rel="stylesheet" href="dicas.css">
     <script src="../utilities/redirecionarPagina.js"></script>
+    <script src="../usuario/usuario.js" defer></script>
     <title>Dicas</title>
 </head>
 
@@ -49,13 +50,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="usuarioSection" onclick="redirecionarPagina('usuario')"> <a href="../usuario/usuario.html"></a>
-                <div class="infoUsuario">
-                    <img src="../images/account.png" alt="Icone com foto do usuario">
-                    <h3 id="nomeUsuario">Placeholder</h3>
-                </div>
-                <p id="emailUsuario" class="emailUsuario">placeholder@gmail.com</p>
-            </div>
+            <div class="usuarioSection" id="usuarioSection" onclick="abrirModalUsuario()">
+
             </div>
         </section>
         <section class="sectionLista">
@@ -67,7 +63,7 @@
 
             </div>
             <div class="lista" id="lista">
-                
+
             </div>
             <div class="paginacao-container">
                 <button id="btnAnterior" class="btn-seta" onclick="mudarPagina(-1)"><img
@@ -103,7 +99,8 @@
 
                 <div class="form-group">
                     <label>Descrição</label>
-                    <textarea id="inputDescricaoDica" rows="4" placeholder="Ex: O pacote de 5kg está saindo por R$ 20,00..."></textarea>
+                    <textarea id="inputDescricaoDica" rows="4"
+                        placeholder="Ex: O pacote de 5kg está saindo por R$ 20,00..."></textarea>
                 </div>
 
                 <div class="modal-actions">

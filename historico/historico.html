@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="../cssreset.css">
     <link rel="stylesheet" href="historico.css">
     <script src="../utilities/redirecionarPagina.js"></script>
+    <script src="../usuario/usuario.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
 </head>
 
 <body>
@@ -46,13 +48,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="usuarioSection" onclick="redirecionarPagina('usuario')"> <a href="../usuario/usuario.html"></a>
-                <div class="infoUsuario">
-                    <img src="../images/account.png" alt="Icone com foto do usuario">
-                    <h3 id="nomeUsuario">Placeholder</h3>
-                </div>
-                <p id="emailUsuario" class="emailUsuario">placeholder@gmail.com</p>
-            </div>
+            <div class="usuarioSection" id="usuarioSection" onclick="abrirModalUsuario()">
+               
             </div>
         </section>
         <section class="sectionLista">

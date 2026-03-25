@@ -16,9 +16,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (tokenValido) {
         listarItems(1);
+        sectionUsuario()
         selectCard()
     }
 })
+
+async function sectionUsuario(){
+    const token = localStorage.getItem('tokenListaCompras')
+    let response = await fetch(`${API}/usuario/me`,{
+        headers: { 'Authorization': `Bearer ${token}` 
+    }})
+    let dadosUsuario = await response.json()
+    console.log (dadosUsuario)
+    const usuarioSection = document.getElementById('usuarioSection')
+    const caminhoDaImagem = dadosUsuario.foto_perfil 
+            ? `${API}${dadosUsuario.foto_perfil}` 
+            : "../images/account.png";
+    usuarioSection.innerHTML +=
+    `
+    <div class="infoUsuario">
+                    <img src="${caminhoDaImagem}" alt="Icone com foto do usuario">
+                    <h3 id="nomeUsuario">${dadosUsuario.usuario}</h3>
+                </div>
+                <p id="emailUsuario" class="emailUsuario">${dadosUsuario.email}</p>
+    `
+}
 
 async function listarItems(pagina) {
     paginaAtual = pagina;

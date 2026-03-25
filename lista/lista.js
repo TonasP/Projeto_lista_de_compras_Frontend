@@ -164,7 +164,6 @@ async function sectionUsuario(){
         headers: { 'Authorization': `Bearer ${token}` 
     }})
     let dadosUsuario = await response.json()
-    console.log(dadosUsuario)
     const usuarioSection = document.getElementById('usuarioSection')
     const caminhoDaImagem = dadosUsuario.foto_perfil 
             ? `${API}${dadosUsuario.foto_perfil}` 

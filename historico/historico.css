@@ -135,6 +135,7 @@
        /* Garante que nunca será menor que 24em */
        flex-shrink: 0
     }
+    
 
     .menus {
         display: flex;
@@ -190,13 +191,13 @@
 
     .infoUsuario img {
         width: 30%;
+        border-radius: 100%;
     }
 
     .emailUsuario {
-        margin-left: 13%;
+        margin-left: 5%;
         font-size: .7vw;
     }
-
     .sectionLista {
         display: flex;
         flex-direction: column;

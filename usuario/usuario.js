@@ -19,10 +19,48 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
 // CONTROLES DO MODAL
 // ==========================================
-function abrirModalUsuario() {
+async function abrirModalUsuario() {
+    const token = localStorage.getItem('tokenListaCompras')
     const modal = document.getElementById('modalUsuarioOverlay');
     if (modal) {
         modal.classList.remove('hidden');
+        
+        // O 'API' precisa estar definido globalmente na sua página (const API = "http://127.0.0.1:3000")
+        const response = await fetch(`${API}/usuario/me`, {
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        let dadosUsuario = await response.json()
+
+        if (response.ok) {
+            const sectionUser = document.getElementById('modal-usuario-content')
+             const caminhoDaImagem = dadosUsuario.foto_perfil 
+            ? `${API}${dadosUsuario.foto_perfil}` 
+            : "../images/account.png";
+            sectionUser.innerHTML +=
+            `<div class="modal-usuario-header">
+            <h2>Meu Perfil</h2>
+            <button onclick="fecharModalUsuario()" class="btn-close-usuario">&times;</button>
+        </div>
+
+        <div class="modal-usuario-body">
+            <div class="perfil-foto-container">
+                <img id="imgPerfilModal" src=${caminhoDaImagem} alt="Sua foto de perfil">
+                <label for="inputFotoModal" class="btn-alterar-foto">Mudar Foto</label>
+                <input type="file" id="inputFotoModal" accept="image/png, image/jpeg" style="display:none;" onchange="salvarNovaFotoModal()">
+            </div>
+
+            <div class="perfil-infos">
+                <p><strong>Nome:</strong> <span id="modalNomeUsuario">${dadosUsuario.usuario}</span></p>
+                <p><strong>E-mail:</strong> <span id="modalEmailUsuario">${dadosUsuario.email}</span></p>
+            </div>
+        </div>
+
+        <div class="modal-usuario-footer">
+            <button onclick="fazerLogout()" class="btn-logout">Sair da Conta</button>
+        </div>`
+        }
+      
         // Opcional: Aqui você pode chamar a rota GET /usuarios/me para preencher nome e email
     }
 }
