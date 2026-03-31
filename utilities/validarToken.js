@@ -1,5 +1,5 @@
 
-const API_BASE = "http://127.0.0.1:3000"; 
+const API_BASE = 'https://lista-de-compras-api-quvq.onrender.com'
 
 console.log(">>> O ARQUIVO validarToken.js FOI CARREGADO PELO NAVEGADOR! <<<");
 

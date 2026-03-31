@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:3000"
+const API = 'https://lista-de-compras-api-quvq.onrender.com'
 
 let chartPrincipal; 
 
