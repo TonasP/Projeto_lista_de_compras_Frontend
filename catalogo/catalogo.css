@@ -245,7 +245,7 @@
        background-color: #F2F2F2;
        width: 25%;
        height: 15%;
-       padding: 1% 2% 0 0;
+       padding: 1% 2%;  
        border-radius: 8px;
        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
        transition: .2s;
@@ -299,10 +299,25 @@
    .titulo {
        margin: 0;
        margin-bottom: 2%;
-       white-space: nowrap;
+       max-width: 70%;
 
 
    }
+   .imgEditCard{
+        width: 6%;
+        margin-bottom: 35%;
+        margin-right: 5% ;
+        transition: .2s;
+        display: none;
+    }
+    .imgEditCard:hover{
+        transform: scale(1.10);
+        display: block;
+        cursor: pointer;
+    }
+    .cards:hover  .imgEditCard{
+        display: block;
+    }
 
    .nome {
        font-size: 1.6vw;

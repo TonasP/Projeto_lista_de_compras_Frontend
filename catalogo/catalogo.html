@@ -14,10 +14,11 @@
 
     <link rel="stylesheet" href="../cssreset.css">
     <link rel="stylesheet" href="catalogo.css">
+    <link rel="stylesheet" href="../usuario/usuario.css">
     <script src="../utilities/redirecionarPagina.js" defer></script>
-   
+    <script src="../utilities/modalEdicao.js"></script>
     <script src="catalogo.js" defer></script>
-     <script src="../usuario/usuario.js" defer></script>
+    <script src="../usuario/usuario.js" defer></script>
 
 
 </head>
@@ -33,7 +34,7 @@
             </div>
             <div class="buttonsConfirm">
                 <button class="add" id="btnAdd" onclick="abrirModalAdicionar()">Adicionar</button>
-               
+
                 <button class="delete" id="btnDelete" onclick="deletarItem()"><img src="../images/trashIcon.svg"
                         alt="icone de deletar"></button>
             </div>
@@ -57,10 +58,10 @@
                     </ul>
                 </div>
                 <div class="usuarioSection" id="usuarioSection" onclick="abrirModalUsuario()">
-               
+
+                </div>
             </div>
-            </div>
-            
+
         </section>
         <section class="sectionLista">
             <div class="utilitarios">
@@ -84,81 +85,127 @@
                         src="../images/greater-than-svgrepo-com.svg" alt=""></button>
             </div>
             <div id="modalCatalogo" class="modal-overlay hidden">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>Novo Produto</h2>
-            <button onclick="fecharModalCatalogo()" class="btn-close">&times;</button>
-        </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Novo Produto</h2>
+                        <button onclick="fecharModalCatalogo()" class="btn-close">&times;</button>
+                    </div>
 
-        <div class="modal-body">
-            <div class="form-group">
-                <label>Nome do Produto</label>
-                <input type="text" id="inputNomeProduto" placeholder="Ex: Detergente, Maçã...">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Nome do Produto</label>
+                            <input type="text" id="inputNomeProduto" placeholder="Ex: Detergente, Maçã...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select id="selectCategoria">
+                                <option value="Outros">📦 Outros / Geral</option>
+
+                                <optgroup label="🖥️ Tecnologia & Eletrônicos">
+                                    <option value="Hardware">Hardware PC (GPU, CPU, RAM)</option>
+                                    <option value="Perifericos">Periféricos (Teclado, Mouse)</option>
+                                    <option value="Cabos">Cabos, Fontes e Adaptadores</option>
+                                    <option value="Audio">Áudio e Vídeo</option>
+                                    <option value="Celulares">Celulares e Acessórios</option>
+                                    <option value="Eletronica">Componentes Eletrônicos</option>
+                                </optgroup>
+
+                                <optgroup label="🛠️ Ferramentas & Oficina">
+                                    <option value="Ferramentas Manuais">Ferramentas Manuais</option>
+                                    <option value="Ferramentas Eletricas">Ferramentas Elétricas</option>
+                                    <option value="Ferragens">Ferragens (Parafusos, Pregos)</option>
+                                    <option value="Madeiras">Madeiras e Chapas</option>
+                                    <option value="Acabamento">Tintas e Acabamento</option>
+                                    <option value="EPI">EPI e Segurança</option>
+                                </optgroup>
+
+                                <optgroup label="🏠 Casa & Mercado">
+                                    <option value="Alimentacao">Alimentação Geral</option>
+                                    <option value="Limpeza">Limpeza e Lavanderia</option>
+                                    <option value="Cozinha">Utensílios de Cozinha</option>
+                                    <option value="Organizacao">Caixas e Organização</option>
+                                    <option value="Decoracao">Decoração</option>
+                                </optgroup>
+
+                                <optgroup label="✏️ Escritório & Estudos">
+                                    <option value="Papelaria">Papelaria e Escrita</option>
+                                    <option value="Impressao">Impressão e Papéis</option>
+                                    <option value="Livros">Livros e Cadernos</option>
+                                </optgroup>
+
+                                <optgroup label="🎨 Hobbies & Lazer">
+                                    <option value="Fotografia">Fotografia</option>
+                                    <option value="Cutelaria">Cutelaria</option>
+                                    <option value="Automotivo">Automotivo</option>
+                                    <option value="Camping">Camping e Pesca</option>
+                                    <option value="Games">Jogos e Consoles</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button onclick="adicionarAoStageCatalogo()" class="btn-primary">Adicionar à Lista
+                                (+)</button>
+                        </div>
+
+                        <div id="areaResumoCatalogo" class="resumo-stage hidden">
+                            <hr>
+                            <h3>Itens a Salvar (<span id="contadorStageCatalogo">0</span>)</h3>
+                            <ul id="listaStageCatalogo">
+                            </ul>
+                            <div class="modal-actions">
+                                <button onclick="salvarTudoNoCatalogo()" class="btn-finalizar-modal">Salvar Tudo no
+                                    Banco</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+         <div id="modalEdicao" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="tituloModalEdicao">Editar Item</h2>
+                <button onclick="fecharModalEdicao()" class="btn-close">&times;</button>
             </div>
 
-            <div class="form-group">
-                <label>Categoria</label>
-                <select id="selectCategoria">
-                    <option value="Outros">📦 Outros / Geral</option>
+            <div class="modal-body">
+                <input type="hidden" id="editId">
+                <input type="hidden" id="editContexto">
 
-        <optgroup label="🖥️ Tecnologia & Eletrônicos">
-            <option value="Hardware">Hardware PC (GPU, CPU, RAM)</option>
-            <option value="Perifericos">Periféricos (Teclado, Mouse)</option>
-            <option value="Cabos">Cabos, Fontes e Adaptadores</option>
-            <option value="Audio">Áudio e Vídeo</option>
-            <option value="Celulares">Celulares e Acessórios</option>
-            <option value="Eletronica">Componentes Eletrônicos</option>
-        </optgroup>
+                <div class="form-group">
+                    <label>Nome do Item</label>
+                    <input type="text" id="editNome" disabled>
+                </div>
 
-        <optgroup label="🛠️ Ferramentas & Oficina">
-            <option value="Ferramentas Manuais">Ferramentas Manuais</option>
-            <option value="Ferramentas Eletricas">Ferramentas Elétricas</option>
-            <option value="Ferragens">Ferragens (Parafusos, Pregos)</option>
-            <option value="Madeiras">Madeiras e Chapas</option>
-            <option value="Acabamento">Tintas e Acabamento</option>
-            <option value="EPI">EPI e Segurança</option>
-        </optgroup>
+                <div class="form-group">
+                    <label>Quantidade</label>
+                    <div class="input-group">
+                        <input type="number" id="editQuantidade" placeholder="Ex: 1">
+                        <select id="editUnidade">
+                            <option value="un">unidades</option>
+                            <option value="kg">kg</option>
+                            <option value="g">gramas</option>
+                            <option value="l">litros</option>
+                            <option value="dz">dúzias</option>
+                            <option value="cx">caixa</option>
+                        </select>
+                    </div>
+                </div>
 
-        <optgroup label="🏠 Casa & Mercado">
-            <option value="Alimentacao">Alimentação Geral</option>
-            <option value="Limpeza">Limpeza e Lavanderia</option>
-            <option value="Cozinha">Utensílios de Cozinha</option>
-            <option value="Organizacao">Caixas e Organização</option>
-            <option value="Decoracao">Decoração</option>
-        </optgroup>
+                <div class="form-group">
+                    <label>Observação / Comentário</label>
+                    <textarea id="editComentario" rows="3" placeholder="Insira os detalhes..."></textarea>
+                </div>
 
-        <optgroup label="✏️ Escritório & Estudos">
-            <option value="Papelaria">Papelaria e Escrita</option>
-            <option value="Impressao">Impressão e Papéis</option>
-            <option value="Livros">Livros e Cadernos</option>
-        </optgroup>
-
-        <optgroup label="🎨 Hobbies & Lazer">
-            <option value="Fotografia">Fotografia</option>
-            <option value="Cutelaria">Cutelaria</option>
-            <option value="Automotivo">Automotivo</option>
-            <option value="Camping">Camping e Pesca</option>
-            <option value="Games">Jogos e Consoles</option>
-        </optgroup>
-                </select>
-            </div>
-
-            <div class="modal-actions">
-                <button onclick="adicionarAoStageCatalogo()" class="btn-primary">Adicionar à Lista (+)</button>
-            </div>
-
-            <div id="areaResumoCatalogo" class="resumo-stage hidden">
-                <hr>
-                <h3>Itens a Salvar (<span id="contadorStageCatalogo">0</span>)</h3>
-                <ul id="listaStageCatalogo">
-                    </ul>
                 <div class="modal-actions">
-                    <button onclick="salvarTudoNoCatalogo()" class="btn-finalizar-modal">Salvar Tudo no Banco</button>
+                    <button onclick="fecharModalEdicao()" class="btn-secondary">Cancelar</button>
+                    <button onclick="salvarEdicao()" class="btn-primary">Salvar Alterações</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 </body>
 

@@ -95,6 +95,10 @@ async function carregarCategorias(pagina) {
         console.error("Erro CRÍTICO ao listar:", erro);
     }
 }
+function filtrarListaPrincipal() {
+    
+    carregarCategorias(1);
+}
 async function criarCard(item) {
     const listaCards = document.getElementById('lista')
      const idReal = item.id || item.lista_id;
@@ -122,6 +126,7 @@ async function criarCard(item) {
                     </div>
 
                 </div>
+                <img src ='../images/editImg.svg' class ='imgEditCard' onclick="abrirModalEdicao('${idReal}', '${item.nome}', '${item.categoria}', 'catalogo')">
             </div>
             `
 }
@@ -242,7 +247,7 @@ function adicionarAoStageCatalogo() {
     const nome = document.getElementById('inputNomeProduto').value;
     const categoria = document.getElementById('selectCategoria').value;
 
-    if (!nome) {
+    if (!nome || nome.trim().length ===0) {
         alert("Por favor, digite o nome do produto.");
         return;
     }

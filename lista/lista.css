@@ -298,10 +298,26 @@
         flex-direction: column;
         align-items: flex-start
     }
+    .imgEditCard{
+        width: 6%;
+        margin-bottom: 35%;
+        margin-right: 5% ;
+        transition: .2s;
+        display: none;
+    }
+    .imgEditCard:hover{
+        transform: scale(1.10);
+        display: block;
+        cursor: pointer;
+    }
+    .cards:hover  .imgEditCard{
+        display: block;
+    }
 
     .titulo {
         margin: 0;
         margin-bottom: 2%;
+        max-width: 90%;
     }
 
     .nome {
@@ -328,8 +344,8 @@
     .cat {
         white-space: nowrap;
         padding: 5% 6%;
-        background-color: #81818177;
-        color: #5f5f5f;
+        background-color: #80C0DB;
+        color: #353535;
         border-radius: 6px;
     }
 

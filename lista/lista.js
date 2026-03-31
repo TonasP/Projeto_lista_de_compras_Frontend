@@ -1,6 +1,5 @@
-
-
 const API = "http://127.0.0.1:3000"
+
 
 let paginaAtual = 1
 
@@ -144,7 +143,8 @@ async function criarCard(itens) {
                     <div class="meio">
                         <div class="topoInfos">
                             <div class="titulo">
-                                <h2 id="nome" class="nome">${itens.produto_nome}</h1>
+                                <h2 id="nome" class="nome">${itens.produto_nome}</h2>
+                                
                             </div>
                             <div id="infos" class="infos">
                                 <p id="quantia" class="quantia">${itens.quantidade}</p>
@@ -155,6 +155,7 @@ async function criarCard(itens) {
                             <p>${comentario}</p>
                         </div>
                     </div>
+                    <img src ='../images/editImg.svg' class ='imgEditCard' onclick="abrirModalEdicao('${idReal}', '${itens.produto_nome}', '${itens.quantidade}', '${comentario}', 'lista')">
                 </div>
         `
 }
@@ -290,15 +291,15 @@ function confirmarItemNoStage() {
     const obs = document.getElementById('inputObs').value;
 
     if (!qtdValor) {
-        alert("Por favor, informe a quantidade.");
-        return;
+        console.log(qtdValor)
+        unidade.value = 'un'
     }
 
    
     const novoItem = {
         produto_id: itemEmEdicao.id, 
         nome: itemEmEdicao.nome,     
-        quantidade: `${qtdValor}${unidade}`, 
+        quantidade: `${qtdValor || '1'}${unidade}`, 
         comentario: obs
     };
 

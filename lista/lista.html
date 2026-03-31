@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../usuario/usuario.css">
     <script src="../utilities/redirecionarPagina.js"></script>
     <script src="../usuario/usuario.js" defer></script>
+    <script src="../utilities/modalEdicao.js"></script>
     <title>Stock Lista</title>
 </head>
 
@@ -52,7 +53,7 @@
                 </ul>
             </div>
             <div class="usuarioSection" id="usuarioSection" onclick="abrirModalUsuario()">
-               
+
             </div>
 
         </section>
@@ -134,6 +135,49 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+    <div id="modalEdicao" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="tituloModalEdicao">Editar Item</h2>
+                <button onclick="fecharModalEdicao()" class="btn-close">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="editId">
+                <input type="hidden" id="editContexto">
+
+                <div class="form-group">
+                    <label>Nome do Item</label>
+                    <input type="text" id="editNome" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label>Quantidade</label>
+                    <div class="input-group">
+                        <input type="number" id="editQuantidade" placeholder="Ex: 1">
+                        <select id="editUnidade">
+                            <option value="un">unidades</option>
+                            <option value="kg">kg</option>
+                            <option value="g">gramas</option>
+                            <option value="l">litros</option>
+                            <option value="dz">dúzias</option>
+                            <option value="cx">caixa</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Observação / Comentário</label>
+                    <textarea id="editComentario" rows="3" placeholder="Insira os detalhes..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button onclick="fecharModalEdicao()" class="btn-secondary">Cancelar</button>
+                    <button onclick="salvarEdicao()" class="btn-primary">Salvar Alterações</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>
