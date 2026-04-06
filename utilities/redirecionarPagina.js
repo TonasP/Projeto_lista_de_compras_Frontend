@@ -2,7 +2,7 @@ async function redirecionarPagina(pagina){
     let aba = String(pagina)
     switch(aba){
         case "lista":
-             window.location.href ='../lista/lista.html'
+             window.location.href ='../lista/index.html'
              break
         case "catalogo":
              window.location.href ='../catalogo/catalogo.html'
