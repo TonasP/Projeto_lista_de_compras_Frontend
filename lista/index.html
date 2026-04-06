@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../utilities/validarToken.js"></script>
+    <script src="/utilities/validarToken.js"></script>
     <script src="lista.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../cssreset.css">
+    <link rel="stylesheet" href="/cssreset.css">
     <link rel="stylesheet" href="lista.css">
-    <link rel="stylesheet" href="../usuario/usuario.css">
-    <script src="../utilities/redirecionarPagina.js"></script>
-    <script src="../usuario/usuario.js" defer></script>
-    <script src="../utilities/modalEdicao.js"></script>
+    <link rel="stylesheet" href="/usuario/usuario.css">
+    <script src="/utilities/redirecionarPagina.js"></script>
+    <script src="/usuario/usuario.js" defer></script>
+    <script src="/utilities/modalEdicao.js"></script>
     <title>Stock Lista</title>
 </head>
 
@@ -24,7 +24,7 @@
     <header>
         <div class="header">
             <div class="logo">
-                <img src="../images/StockLogo.png" alt="Logo da Stock lista">
+                <img src="/images/StockLogo.png" alt="Logo da Stock lista">
             </div>
             <div class="title">
                 <h1>Lista de compras</h1>
@@ -32,7 +32,7 @@
             <div class="buttonsConfirm">
                 <button class="add" id="btnAdd" onclick="abrirModalAdicionar()">Adicionar</button>
                 <button class="confirm" id="btnConfirm" onclick="finalizarCompra()">Finalizar</button>
-                <button class="delete" id="btnDelete" onclick="deletarItem()"><img src="../images/trashIcon.svg"
+                <button class="delete" id="btnDelete" onclick="deletarItem()"><img src="/images/trashIcon.svg"
                         alt="icone de deletar"></button>
             </div>
 
@@ -42,13 +42,13 @@
         <section class="sidebar">
             <div class="menusTabelas">
                 <ul>
-                    <li id="atual" onclick="redirecionarPagina('lista')"><a href="../lista/index.html"></a>Lista</li>
+                    <li id="atual" onclick="redirecionarPagina('lista')"><a href="/lista/index.html"></a>Lista</li>
 
-                    <li onclick="redirecionarPagina('catalogo')"> <a href="../catalogo/catalogo.html"></a>Catalogo</li>
+                    <li onclick="redirecionarPagina('catalogo')"> <a href="/catalogo/catalogo.html"></a>Catalogo</li>
 
-                    <li onclick="redirecionarPagina('dicas')"><a href="../dicas/dicas.html"></a>Dicas</li>
+                    <li onclick="redirecionarPagina('dicas')"><a href="/dicas/dicas.html"></a>Dicas</li>
 
-                    <li onclick="redirecionarPagina('historico')"><a href="../historico/historico.html"></a>Histórico
+                    <li onclick="redirecionarPagina('historico')"><a href="/historico/historico.html"></a>Histórico
                     </li>
                 </ul>
             </div>
@@ -60,7 +60,7 @@
         <section class="sectionLista">
             <div class="utilitarios">
                 <div class="searchBar">
-                    <img src="../images/searchIcon.svg" alt="">
+                    <img src="/images/searchIcon.svg" alt="">
                     <input type="text" id="inputBuscaLista" placeholder="Pesquisar" onkeyup="filtrarListaPrincipal()">
                 </div>
 
@@ -70,13 +70,13 @@
             </div>
             <div class="paginacao-container">
                 <button id="btnAnterior" class="btn-seta" onclick="mudarPagina(-1)"><img
-                        src="../images/less-than-svgrepo-com.svg" alt=""></button>
+                        src="/images/less-than-svgrepo-com.svg" alt=""></button>
 
                 <div id="paginacaoBullets" class="bullets">
                 </div>
 
                 <button id="btnProximo" class="btn-seta" onclick="mudarPagina(1)"><img
-                        src="../images/greater-than-svgrepo-com.svg" alt=""></button>
+                        src="/images/greater-than-svgrepo-com.svg" alt=""></button>
             </div>
         </section>
 
@@ -91,7 +91,7 @@
 
             <div id="telaSelecao">
                 <div class="search-bar-modal">
-                    <input type="text" id="inputBuscaCatalogo" placeholder="Buscar no catálogo..."
+                    <input type="text" id="inputBuscaCatalogo" placeholder="Buscar no catálogo."
                         onkeyup="filtrarCatalogo()">
                 </div>
 
@@ -126,7 +126,7 @@
 
                 <div class="form-group">
                     <label>Observação (Opcional)</label>
-                    <textarea id="inputObs" rows="3" placeholder="Ex: Marca específica, maduro..."></textarea>
+                    <textarea id="inputObs" rows="3" placeholder="Ex: Marca específica, maduro."></textarea>
                 </div>
 
                 <div class="modal-actions">
@@ -170,7 +170,7 @@
 
                 <div class="form-group">
                     <label>Observação / Comentário</label>
-                    <textarea id="editComentario" rows="3" placeholder="Insira os detalhes..."></textarea>
+                    <textarea id="editComentario" rows="3" placeholder="Insira os detalhes."></textarea>
                 </div>
 
                 <div class="modal-actions">

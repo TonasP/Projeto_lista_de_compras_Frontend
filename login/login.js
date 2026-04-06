@@ -22,7 +22,7 @@ async function fazerLogin() {
         const data = await response.json()
         if (data.token) {
             localStorage.setItem('tokenListaCompras', data.token)
-            window.location.href='../lista/index.html'
+            window.location.href='/lista/index.html'
 
         }
         else {
@@ -148,7 +148,7 @@ function esqueciSenha() {
             const email = document.getElementById("recEmail").value;
             const btn = e.target.querySelector("button");
             
-            btn.innerText = "Enviando...";
+            btn.innerText = "Enviando.";
             btn.disabled = true;
 
             try {

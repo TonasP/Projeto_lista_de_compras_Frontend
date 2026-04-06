@@ -155,7 +155,7 @@ async function criarCard(itens) {
                             <p>${comentario}</p>
                         </div>
                     </div>
-                    <img src ='../images/editImg.svg' class ='imgEditCard' onclick="abrirModalEdicao('${idReal}', '${itens.produto_nome}', '${itens.quantidade}', '${comentario}', 'lista')">
+                    <img src ='/images/editImg.svg' class ='imgEditCard' onclick="abrirModalEdicao('${idReal}', '${itens.produto_nome}', '${itens.quantidade}', '${comentario}', 'lista')">
                 </div>
         `
 }
@@ -168,7 +168,7 @@ async function sectionUsuario(){
     const usuarioSection = document.getElementById('usuarioSection')
     const caminhoDaImagem = dadosUsuario.foto_perfil 
             ? `${API}${dadosUsuario.foto_perfil}` 
-            : "../images/account.png";
+            : "/images/account.png";
     usuarioSection.innerHTML +=
     `
     <div class="infoUsuario">

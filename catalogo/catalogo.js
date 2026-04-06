@@ -32,7 +32,7 @@ async function sectionUsuario(){
     const usuarioSection = document.getElementById('usuarioSection')
     const caminhoDaImagem = dadosUsuario.foto_perfil 
             ? `${API}${dadosUsuario.foto_perfil}` 
-            : "../images/account.png";
+            : "/images/account.png";
     usuarioSection.innerHTML +=
     `
     <div class="infoUsuario">
@@ -126,7 +126,7 @@ async function criarCard(item) {
                     </div>
 
                 </div>
-                <img src ='../images/editImg.svg' class ='imgEditCard' onclick="abrirModalEdicao('${idReal}', '${item.nome}', '${item.categoria}', 'catalogo')">
+                <img src ='/images/editImg.svg' class ='imgEditCard' onclick="abrirModalEdicao('${idReal}', '${item.nome}', '${item.categoria}', 'catalogo')">
             </div>
             `
 }

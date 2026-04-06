@@ -10,7 +10,7 @@ async function validarToken() {
 
     if (!token) {
         console.warn("Sem token no LocalStorage.");
-        window.location.href = '../login/login.html';
+        window.location.href = '/login/login.html';
         return false;
     }
 
@@ -29,7 +29,7 @@ async function validarToken() {
             alert("Sessão expirada (Erro 401). Faça login novamente.");
             
             localStorage.removeItem('tokenListaCompras');
-            window.location.href = '../login/login.html';
+            window.location.href = '/login/login.html';
             return false;
         }
 

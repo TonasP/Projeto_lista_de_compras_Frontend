@@ -1,7 +1,7 @@
 async function inicializarModalUsuario() {
     try {
-        // Busca o fragmento HTML (Ajuste o caminho '../usuario/' se necessário)
-        const response = await fetch('../usuario/usuario.html');
+        // Busca o fragmento HTML (Ajuste o caminho '/usuario/' se necessário)
+        const response = await fetch('/usuario/usuario.html');
         const html = await response.text();
         
         // Injeta no final do body da página atual
@@ -36,7 +36,7 @@ async function abrirModalUsuario() {
             const sectionUser = document.getElementById('modal-usuario-content')
              const caminhoDaImagem = dadosUsuario.foto_perfil 
             ? `${API}${dadosUsuario.foto_perfil}` 
-            : "../images/account.png";
+            : "/images/account.png";
             sectionUser.innerHTML +=
             `<div class="modal-usuario-header">
             <h2>Meu Perfil</h2>
@@ -74,7 +74,7 @@ function fecharModalUsuario() {
 
 function fazerLogout() {
     localStorage.removeItem('tokenListaCompras');
-    window.location.href = "../login/index.html"; // Redireciona pro login
+    window.location.href = "/login/index.html"; // Redireciona pro login
 }
 
 // ==========================================

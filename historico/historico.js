@@ -20,7 +20,7 @@ async function sectionUsuario(){
     const usuarioSection = document.getElementById('usuarioSection')
     const caminhoDaImagem = dadosUsuario.foto_perfil 
             ? `${API}${dadosUsuario.foto_perfil}` 
-            : "../images/account.png";
+            : "/images/account.png";
     usuarioSection.innerHTML +=
     `
     <div class="infoUsuario">
