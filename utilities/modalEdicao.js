@@ -1,57 +1,92 @@
-function abrirModalEdicao(id, nome, quantidadeCompleta, comentario, contexto) {
+function abrirModalEdicao(id, param1, param2, param3, contexto) {
     const modal = document.getElementById('modalEdicao');
     
     document.getElementById('editId').value = id;
     document.getElementById('editContexto').value = contexto;
-    document.getElementById('editNome').value = nome;
 
-    // Lógica para separar o número da unidade de medida (ex: de "2kg" para "2" e "kg")
-    let numero = '';
-    let unidade = 'un'; // Valor padrão
+    // Elementos de layout que vamos alternar
+    const grupoQtd = document.getElementById('grupoQuantidadeEdicao');
+    const grupoProd = document.getElementById('grupoProdutoEdicao');
+    const inputNome = document.getElementById('editNome');
+    const labelNome = document.getElementById('labelEditNome');
+    const labelComentario = document.getElementById('labelEditComentario');
 
-    if (quantidadeCompleta && quantidadeCompleta !== 'undefined' && quantidadeCompleta !== 'null') {
-        // Tenta extrair apenas os números da string
-        numero = parseFloat(quantidadeCompleta) || '';
+    // MODO DICAS
+    if (contexto === 'dicas') {
+        labelNome.innerText = "Título da Dica";
+        inputNome.value = param1; // No modo dica, param1 é o título
+        inputNome.disabled = false; // Permite editar o título da dica
+
+        labelComentario.innerText = "Descrição";
+        document.getElementById('editComentario').value = param3; // param3 é a descrição
         
-        // Remove os números da string original para sobrar apenas a unidade (letras)
-        unidade = quantidadeCompleta.toString().replace(numero, '').trim().toLowerCase();
+        // Esconde Quantidade e Mostra Produto
+        grupoQtd.classList.add('hidden');
+        grupoProd.classList.remove('hidden');
+        document.getElementById('editProdutoDica').value = param2; // param2 é o produto
+    } 
+    // MODO LISTA / CATÁLOGO
+    else {
+        labelNome.innerText = "Nome do Item";
+        inputNome.value = param1;
+        inputNome.disabled = true; // Não permite editar o nome do produto
+
+        labelComentario.innerText = "Observação";
+        document.getElementById('editComentario').value = param3 !== 'undefined' ? param3 : '';
         
-        // Se por acaso a unidade vier vazia ou não existir no select, força para 'un'
-        if (!unidade) unidade = 'un';
+        // Mostra Quantidade e Esconde Produto
+        grupoQtd.classList.remove('hidden');
+        grupoProd.classList.add('hidden');
+
+        // Lógica de separar unidade (ex: "2kg" -> "2" e "kg")
+        let numero = '';
+        let unidade = 'un';
+        if (param2 && param2 !== 'undefined' && param2 !== 'null') {
+            numero = parseFloat(param2) || '';
+            unidade = param2.toString().replace(numero, '').trim().toLowerCase();
+            if (!unidade) unidade = 'un';
+        }
+        document.getElementById('editQuantidade').value = numero;
+        document.getElementById('editUnidade').value = unidade;
     }
 
-    document.getElementById('editQuantidade').value = numero;
-    document.getElementById('editUnidade').value = unidade;
-    
-    document.getElementById('editComentario').value = comentario !== 'undefined' && comentario !== 'null' ? comentario : '';
-
-    // Mostra o modal
     modal.classList.remove('hidden');
 }
 
-// Função para fechar o modal
 function fecharModalEdicao() {
     document.getElementById('modalEdicao').classList.add('hidden');
 }
 
-// Função que gerencia o salvamento com base em onde você está
 async function salvarEdicao() {
     const id = document.getElementById('editId').value;
     const contexto = document.getElementById('editContexto').value;
-    
-    // Pega o número e a unidade
-    const qtdNum = document.getElementById('editQuantidade').value;
-    const unidade = document.getElementById('editUnidade').value;
-    
-    // Junta no mesmo padrão que você já usa (ex: "2kg" ou "1un" se estiver vazio)
-    const quantidadeFinal = `${qtdNum || '1'}${unidade}`;
-    
     const comentario = document.getElementById('editComentario').value;
-
     const token = localStorage.getItem('tokenListaCompras');
 
     try {
-        if (contexto === 'lista') {
+        if (contexto === 'dicas') {
+            const titulo = document.getElementById('editNome').value;
+            const produto = document.getElementById('editProdutoDica').value;
+
+            await fetch(`${API}/dicas/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    titulo: titulo,
+                    produto_nome: produto,
+                    descricao: comentario
+                })
+            });
+            listarItems(paginaAtual); // Atualiza a tela de dicas
+        } 
+        else if (contexto === 'lista') {
+            const qtdNum = document.getElementById('editQuantidade').value;
+            const unidade = document.getElementById('editUnidade').value;
+            const quantidadeFinal = `${qtdNum || '1'}${unidade}`;
+
             await fetch(`${API}/lista/${id}`, {
                 method: 'PUT',
                 headers: {
@@ -59,34 +94,18 @@ async function salvarEdicao() {
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    quantidade: quantidadeFinal, // Envia a string formatada
+                    quantidade: quantidadeFinal,
                     comentario: comentario
                 })
             });
-            
-            listarItems(paginaAtual); 
-        } 
-        else if (contexto === 'catalogo') {
-            await fetch(`${API}/catalogo/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    quantidade_padrao: quantidadeFinal,
-                    descricao: comentario
-                })
-            });
-            
-            // listarCatalogo(); // Descomente quando a função do catálogo existir
+            listarItems(paginaAtual); // Atualiza a tela da lista
         }
 
-        alert("Item atualizado com sucesso!");
+        alert("Alteração salva com sucesso!");
         fecharModalEdicao();
 
     } catch (erro) {
         console.error("Erro ao salvar edição:", erro);
-        alert("Houve um erro ao atualizar o item.");
+        alert("Houve um erro ao atualizar os dados.");
     }
 }

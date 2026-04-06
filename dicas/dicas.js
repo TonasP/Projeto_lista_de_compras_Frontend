@@ -45,12 +45,9 @@ async function listarItems(pagina) {
     paginaAtual = pagina;
     const offset = (pagina - 1) * limit;
 
-    // --- MUDANÇA DE SEGURANÇA AQUI ---
-    // Tenta pegar o elemento
+    
     const inputBusca = document.getElementById('inputBuscaLista');
 
-    // Se o elemento existir, pega o valor. Se não existir, usa vazio ""
-    // Isso evita o erro "Cannot read property 'value' of null"
     const termoBusca = inputBusca ? inputBusca.value : "";
     // ----------------------------------
 
@@ -59,21 +56,20 @@ async function listarItems(pagina) {
 
         let url = `${API}/dicas?limit=${limit}&offset=${offset}`;
 
-        // Só adiciona na URL se tiver algo escrito
+        
         if (termoBusca) {
             url += `&busca=${encodeURIComponent(termoBusca)}`;
         }
 
-        console.log("Buscando URL:", url); // <--- OLHE ISSO NO CONSOLE (F12)
 
         const response = await fetch(url, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
-        // Verificação de Token Expirado (Importante!)
+        
         if (response.status === 401 || response.status === 403) {
             console.warn("Sessão expirada");
-            // window.location.href = "../login/index.html"; // Descomente se quiser redirecionar
+             window.location.href = "../login/index.html"; 
             return;
         }
 
@@ -103,7 +99,6 @@ async function listarItems(pagina) {
 }
 
 function filtrarListaPrincipal() {
-    // Quando pesquisamos, sempre voltamos para a primeira página
     listarItems(1);
 }
 
@@ -150,7 +145,7 @@ async function criarCard(itens) {
 
     const listaCards = document.getElementById('lista');
     
-    // Removi alguns data-attributes que eram exclusivos da "Lista" (como quantidade)
+    
     listaCards.innerHTML += `
         <div class="cards" id="card-${idReal}" data-id="${idReal}">
             <div class="lateral" id="lateral">
@@ -172,13 +167,12 @@ async function criarCard(itens) {
                     <p>${descricao}</p>
                 </div>
             </div>
+            <img src ='/images/editImg.svg' class ='imgEditCard' onclick="abrirModalEdicao('${idReal}', '${itens.titulo}', '${itens.produto_nome}', '${itens.descricao}', 'dicas')">
         </div>
     `;
 }
 
-// ==========================================
-// FUNÇÕES DO MODAL DE DICAS
-// ==========================================
+
 
 function abrirModalAdicionar() {
     document.getElementById('modalOverlay').classList.remove('hidden');
@@ -186,7 +180,7 @@ function abrirModalAdicionar() {
 
 function fecharModal() {
     document.getElementById('modalOverlay').classList.add('hidden');
-    // Limpa os campos sempre que fechar
+    
     document.getElementById('inputTituloDica').value = '';
     document.getElementById('inputProdutoDica').value = '';
     document.getElementById('inputDescricaoDica').value = '';
@@ -254,20 +248,18 @@ function acionarBtnDeleteEAdd() {
     let checkCheckboxAtivo = document.getElementsByClassName("checkboxChecked")
     if (checkCardAtivo.length > 0 || checkCheckboxAtivo.length > 0) {
         btnDeletar.classList.add('deleteMostrar')
-        btnFinalizar.classList.add('addFinalizar')
     }
     else {
         btnDeletar.classList.remove('deleteMostrar')
-        btnFinalizar.classList.remove('addFinalizar')
     }
 }
 
 function pegarItensSelecionados() {
-    const cardsMarcados = document.querySelectorAll('.cardsChecked'); // Corrigido o ponto
+    const cardsMarcados = document.querySelectorAll('.cardsChecked'); 
 
     return Array.from(cardsMarcados).map(card => ({
-        id: card.dataset.id,              // ID da Lista (para a URL)
-        dica_id: card.dataset.idReal, // ID do Produto (para o Body)
+        id: card.dataset.id,              
+        dica_id: card.dataset.idReal, 
         titulo: card.dataset.titulo,
         produtoNome: card.dataset.produtoNome,
         descricao: card.dataset.descricao

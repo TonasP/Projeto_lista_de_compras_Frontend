@@ -4,14 +4,7 @@ let paginaAtual = 1
 
 let offset = 0
 
-const tokenValido = validarToken();
 
-    if (tokenValido) {
-        carregarCategorias(1);
-        sectionUsuario()
-        selectCard()
-        
-    }
 
 
 const limit = 9
@@ -21,8 +14,8 @@ let btnFinalizar = document.querySelector('.confirm')
 let catalogoCompleto = [];
 let itensParaAdicionar = [];
 let itemEmEdicao = null;
-document.addEventListener("DOMContentLoaded", () => {
-    const tokenValido = validarToken();
+
+const tokenValido = validarToken();
 
     if (tokenValido) {
         carregarCategorias(1);
@@ -30,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
         selectCard()
         
     }
-})
 
 async function sectionUsuario(){
     const token = localStorage.getItem('tokenListaCompras')
@@ -136,7 +128,6 @@ async function criarCard(item) {
                     </div>
 
                 </div>
-                <img src ='/images/editImg.svg' class ='imgEditCard' onclick="abrirModalEdicao('${idReal}', '${item.nome}', '${item.categoria}', 'catalogo')">
             </div>
             `
 }

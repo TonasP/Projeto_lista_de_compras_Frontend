@@ -1,9 +1,8 @@
-/* Fundo escurecido */
 .modal-usuario-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.6);
-    z-index: 9999; /* Fica por cima de tudo */
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,7 +14,6 @@
     display: none !important;
 }
 
-/* Caixa do Modal */
 .modal-usuario-content {
     background: white;
     width: 90%;
@@ -36,13 +34,19 @@
     padding-bottom: 10px;
 }
 
-.modal-usuario-header h2 { margin: 0; color: var(--cor-terciaria, #0c6350); }
-
-.btn-close-usuario {
-    background: none; border: none; font-size: 1.5em; cursor: pointer; color: #555;
+.modal-usuario-header h2 { 
+    margin: 0; 
+    color: var(--cor-terciaria, #0c6350); 
 }
 
-/* Área da Foto */
+.btn-close-usuario {
+    background: none; 
+    border: none; 
+    font-size: 1.5em; 
+    cursor: pointer; 
+    color: #555;
+}
+
 .perfil-foto-container {
     display: flex;
     flex-direction: column;
@@ -58,17 +62,37 @@
 }
 
 .btn-alterar-foto {
-    background: #f2f2f2; padding: 8px 16px; border-radius: 6px;
-    font-size: 0.9em; cursor: pointer; transition: 0.2s; border: 1px solid #ccc;
+    background: #f2f2f2; 
+    padding: 8px 16px; 
+    border-radius: 6px;
+    font-size: 0.9em; 
+    cursor: pointer; 
+    transition: 0.2s; 
+    border: 1px solid #ccc;
 }
 
-.btn-alterar-foto:hover { background: #e0e0e0; }
+.btn-alterar-foto:hover { 
+    background: #e0e0e0; 
+}
 
-.perfil-infos p { margin: 5px 0; font-size: 1em; color: #333; }
+.perfil-infos p { 
+    margin: 5px 0; 
+    font-size: 1em; 
+    color: #333; 
+}
 
 .btn-logout {
-    width: 100%; padding: 12px; background: #cc4b4b; color: white;
-    border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s;
+    width: 100%; 
+    padding: 12px; 
+    background: #cc4b4b; 
+    color: white;
+    border: none; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.2s;
 }
 
-.btn-logout:hover { background: #b03a3a; }
+.btn-logout:hover { 
+    background: #b03a3a; 
+}
