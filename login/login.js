@@ -22,7 +22,7 @@ async function fazerLogin() {
         const data = await response.json()
         if (data.token) {
             localStorage.setItem('tokenListaCompras', data.token)
-            window.location.href='../lista/lista.html'
+            window.location.href='../lista/index.html'
 
         }
         else {
