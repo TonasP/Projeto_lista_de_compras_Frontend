@@ -4,6 +4,16 @@ let paginaAtual = 1
 
 let offset = 0
 
+const tokenValido = validarToken();
+
+    if (tokenValido) {
+        carregarCategorias(1);
+        sectionUsuario()
+        selectCard()
+        
+    }
+
+
 const limit = 9
 let btnDeletar = document.querySelector('.delete')
 let btnFinalizar = document.querySelector('.confirm')
