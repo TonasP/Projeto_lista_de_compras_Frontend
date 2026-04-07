@@ -352,17 +352,24 @@ html {
 }
 .modal-header{
     display: flex;
-    height: 4em;
+    height: 3em;
     justify-content: center;
     gap: 20%;
+    background-color: #4c7a3e;
+    padding-top: 20px;
+    padding-left:20px;
+    padding-right:20px;
 }
 .modal-header h2{
     font-size: 1.5vw;
     margin-left: 30%;
 }
+.modal-body{
+    padding: 30px;
+}
 .btn-close{
     width: 6%;
-    height: 50%;
+    height: 60%;
     background-color:#d33737b6;
     border: none;
     border-radius: 8px;
@@ -394,7 +401,6 @@ html {
     width: 90%;
     max-width: 600px;
     border-radius: 12px;
-    padding: 20px;
     max-height: 90vh;
     overflow-y: auto;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
@@ -415,6 +421,27 @@ html {
     text-align: center;
     padding: 2%;
     width: 50%;
+}
+#telaConfiguracao{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+.infosItem{
+    display: flex;
+    gap: 5%;
+    margin-bottom: 4%;
+}
+#nomeItemConfig, .categoria-badge{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cor-secundaria);
+    text-align: center;
+    justify-content: center;
+    height: 2em;
+    border-radius: 8px;
+    width: 50%;
+
 }
 
 .catalogo-grid {
@@ -459,6 +486,33 @@ html {
     border-radius: 6px;
     border: 1px solid #ccc;
 }
+.btn-secondary{
+    background-color: #d33737b6;
+    border: none;
+    padding: 2%;
+    border-radius: 8px;
+    box-shadow: 0px 0px 2px 0px #000000;  
+    transition: .2s; 
+}
+.btn-primary{
+    background-color: var(--cor-secundaria);
+    border: none;
+    padding: 2%;
+    border-radius: 8px;
+    box-shadow: 0px 0px 2px 0px #000000;   
+    margin-left: 5%;
+    transition: .2s; 
+}
+.btn-secondary:hover{
+    transform: scale(1.10);
+    background-color: #d33737;
+}
+.btn-primary:hover{
+    transform: scale(1.10);
+    background-color: var(--cor-primaria);
+}
+
+
 
 textarea {
     width: 100%;
@@ -478,16 +532,18 @@ textarea {
 .resumo-stage ul {
     list-style: none;
     padding: 0;
+    margin-top: 2%;
     margin-bottom: 15px;
 }
 
 .resumo-stage li {
     background: #eee;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     padding: 8px;
     border-radius: 4px;
     display: flex;
     justify-content: space-between;
+    background-color: var(--cor-secundaria);
 }
 
 .btn-finalizar-modal {
@@ -499,6 +555,12 @@ textarea {
     border-radius: 8px;
     font-size: 1.1em;
     cursor: pointer;
+    transition: .2s;
+}
+.btn-finalizar-modal:hover{
+    transform: scale(1.05);
+    background-color: var(--cor-terciaria);
+    
 }
 
 .paginacao-container {
