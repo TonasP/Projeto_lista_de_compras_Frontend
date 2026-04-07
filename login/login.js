@@ -88,7 +88,7 @@ function iniciarModalCadastro() {
         const senha = document.getElementById("cadSenha").value;
 
         try {
-            const response = await fetch(API, {
+            const response = await fetch(`${API}/cadastro`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ usuario, email, localização, senha })

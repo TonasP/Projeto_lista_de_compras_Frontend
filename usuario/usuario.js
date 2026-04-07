@@ -71,7 +71,7 @@ function fecharModalUsuario() {
 
 function fazerLogout() {
     localStorage.removeItem('tokenListaCompras');
-    window.location.href = "/login/index.html";
+    window.location.href = "/login/login.html";
 }
 
 
