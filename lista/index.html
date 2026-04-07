@@ -86,7 +86,7 @@
 
             <div class="modal-header">
                 <h2>Adicionar Itens</h2>
-                <button onclick="fecharModal()" class="btn-close">&times;</button>
+                <button onclick="fecharModal()" class="btn-close"><img src="/images/close-com.svg" alt=""></button>
             </div>
 
             <div id="telaSelecao">
@@ -97,12 +97,14 @@
 
                 <div class="catalogo-grid" id="gridCatalogo">
                 </div>
+                <p class="help">Não achou seu produto ? Adicione ele no <a href="/catalogo/catalogo.html">Catálago</a></p>
 
                 <div class="resumo-stage hidden" id="areaResumo">
                     <h3>Itens prontos para adicionar (<span id="contadorStage">0</span>)</h3>
                     <ul id="listaStage"></ul>
                     <button onclick="salvarTudoNoBanco()" class="btn-finalizar-modal">Concluir e Salvar Lista</button>
                 </div>
+                
             </div>
 
             <div id="telaConfiguracao" class="hidden">
