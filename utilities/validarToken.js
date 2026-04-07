@@ -1,8 +1,6 @@
 
 const API_BASE = 'https://lista-de-compras-api-quvq.onrender.com'
 
-console.log(">>> O ARQUIVO validarToken.js FOI CARREGADO PELO NAVEGADOR! <<<");
-
 async function validarToken() {
    
 
