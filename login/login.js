@@ -44,7 +44,7 @@ function iniciarModalCadastro() {
                 <form id="formCadastro">
                     <input type="text" id="cadNome" placeholder="Nome completo" required>
                     <input type="email" id="cadEmail" placeholder="Seu email" required>
-                    <input type="text" id = "cadLocal" placeholder= "Sua localização" required>
+                    <input type="text" id = "cadLocal" placeholder= "Sua localizacao" required>
                     <input type="password" id="cadSenha" placeholder="Senha" required>
                     <button type="submit" class ="btnCadastrar">Cadastrar</button>
                 </form>
@@ -84,14 +84,14 @@ function iniciarModalCadastro() {
 
         const usuario = document.getElementById("cadNome").value;
         const email = document.getElementById("cadEmail").value;
-        const localização = document.getElementById("cadLocal").value
+        const localizacao = document.getElementById("cadLocal").value
         const senha = document.getElementById("cadSenha").value;
 
         try {
             const response = await fetch(`${API}/usuario/cadastro`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ usuario, email, localização, senha })
+                body: JSON.stringify({ usuario, email, localizacao, senha })
             });
 
             const data = await response.json();
