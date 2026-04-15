@@ -1,9 +1,10 @@
 let API = 'https://lista-de-compras-api-quvq.onrender.com'
-
+import cardAviso from "/utilities/cardAviso.js";
 
 let paginaAtual = 1
 
 let offset = 0
+let totalPaginas=0
 
 const limit = 6
 let btnDeletar = document.querySelector('.delete')
@@ -76,7 +77,7 @@ async function listarItems(pagina) {
 
     } catch (erro) {
         console.error("Erro CRÍTICO ao listar:", erro);
-        alert("Erro ao carregar lista. Verifique o console (F12).");
+        cardAviso("Erro ao carregar lista",1);
     }
 }
 
@@ -228,7 +229,7 @@ async function abrirModalAdicionar() {
         renderizarCatalogo(catalogoCompleto.itens);
     } catch (erro) {
         console.error("Erro ao buscar catálogo", erro);
-        alert("Erro ao carregar itens do catálogo.");
+        cardAviso("Erro ao carregar itens do catálogo.",1);
     }
 }
 
@@ -287,12 +288,12 @@ function voltarParaSelecao() {
 
 function confirmarItemNoStage() {
     const qtdValor = document.getElementById('inputQtd').value;
-    const unidade = document.getElementById('selectUnidade').value;
+    let unidade = document.getElementById('selectUnidade').value;
     const obs = document.getElementById('inputObs').value;
 
-    if (!qtdValor) {
+    if (qtdValor.trim('').length === 0 || qtdValor <=0) {
         console.log(qtdValor)
-        unidade.value = 'un'
+        unidade= 'un'
     }
 
    
@@ -360,12 +361,12 @@ async function salvarTudoNoBanco() {
 
     try {
         await Promise.all(promessas);
-        alert("Todos os itens foram adicionados com sucesso!");
+        cardAviso("Todos os itens foram adicionados com sucesso!",1);
         fecharModal();
         listarItems();
     } catch (erro) {
         console.log("Erro ao salvar itens", erro.message);
-        alert("Houve um erro ao salvar alguns itens.");
+        cardAviso("Houve um erro ao salvar alguns itens.",1);
     }
 }
 function pegarItensSelecionados() {
@@ -383,7 +384,7 @@ async function deletarItem() {
     const ids = cards.map(item => item.id);
     const token = localStorage.getItem('tokenListaCompras')
     if (ids.length === 0) {
-        alert("Nenhum item selecionado")
+        cardAviso("Nenhum item selecionado",1)
         return
     }
     if (!confirm(`Tem certeza que deseja deletar ${ids.length} itens`)) return
@@ -402,7 +403,7 @@ async function finalizarCompra() {
     const token = localStorage.getItem('tokenListaCompras');
 
     if (itens.length === 0) {
-        alert('Nenhum item selecionado');
+        cardAviso('Nenhum item selecionado',1);
         return;
     }
 
@@ -436,7 +437,7 @@ async function finalizarCompra() {
         }
     }
 
-    alert("Itens marcados como comprados!");
+    cardAviso("Itens marcados como comprados!",1);
 
 
     listarItems(paginaAtual);
@@ -445,3 +446,19 @@ async function finalizarCompra() {
     document.querySelector('.confirm').classList.remove('addFinalizar');
 }
 const listagem = document.getElementById("lista")
+
+
+
+window.listarItems = listarItems;
+window.filtrarListaPrincipal = filtrarListaPrincipal;
+window.mudarPagina = mudarPagina;
+window.abrirModalAdicionar = abrirModalAdicionar;
+window.fecharModal = fecharModal;
+window.filtrarCatalogo = filtrarCatalogo;
+window.abrirTelaConfiguracao = abrirTelaConfiguracao;
+window.voltarParaSelecao = voltarParaSelecao;
+window.confirmarItemNoStage = confirmarItemNoStage;
+window.removerDoStage = removerDoStage;
+window.salvarTudoNoBanco = salvarTudoNoBanco;
+window.deletarItem = deletarItem;
+window.finalizarCompra = finalizarCompra;

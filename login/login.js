@@ -1,6 +1,6 @@
 
 const API = 'https://lista-de-compras-api-quvq.onrender.com'
-
+import cardAviso from "/utilities/cardAviso.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     iniciarModalCadastro()
@@ -13,6 +13,11 @@ async function fazerLogin() {
     const email = document.getElementById("insiraEmail").value
     const senha = document.getElementById("insiraSenha").value
     try {
+        if (email.trim('').length === 0 ||senha.trim('').length === 0 ){
+            cardAviso('Falha no Login: Todos os campos devem ser preenchidos', 1)
+            return
+        }
+
         console.log("Enviando para:", `${API}/usuario/login`);
         const response = await fetch(`${API}/usuario/login`, {
             method: 'POST',
@@ -26,7 +31,7 @@ async function fazerLogin() {
 
         }
         else {
-            alert("Falha no login")
+            cardAviso('Falha no Login: Usuário/E-mail ou senha incorretos', 1)
         }
     }
     catch (error) {
@@ -97,15 +102,16 @@ function iniciarModalCadastro() {
             const data = await response.json();
 
             if (response.ok) {
-                alert("Cadastro realizado com sucesso!");
+                cardAviso('Cadastro realizado com sucesso', 1)
                 modal.classList.remove("mostrar");
                 form.reset();
             } else {
-                alert("Erro: " + (data.message || "Não foi possível cadastrar"));
+                cardAviso("Não foi possível cadastrar", 1);
+                return
             }
         } catch (error) {
             console.error(error);
-            alert("Erro de conexão com o servidor.");
+            
         }
     });
 }
@@ -161,17 +167,17 @@ function esqueciSenha() {
 
                 
                 if (response.ok) {
-                    alert("Se o email existir, você receberá um token.");
+                    cardAviso("Se o email existir, você receberá um token.", 1);
                     mostrarEtapaCodigo(email); 
                 } else {
                     const erro = await response.json();
-                    alert(erro.error || "Erro ao enviar email");
+                    cardAviso("Erro ao enviar email", 1);
                     btn.innerText = "Tentar Novamente";
                     btn.disabled = false;
                 }
             } catch (error) {
                 console.error(error);
-                alert("Erro de conexão.");
+                cardAviso("Erro de conexão.", 1);
                 btn.innerText = "Enviar Token";
                 btn.disabled = false;
             }
@@ -201,7 +207,7 @@ function esqueciSenha() {
                 tokenGuardado = codigoDigitado; 
                 mostrarEtapaNovaSenha();
             } else {
-                alert("Por favor, insira o token.");
+                cardAviso("Por favor, insira o token.", 1);
             }
         });
     }
@@ -223,7 +229,7 @@ function esqueciSenha() {
             const confirmacao = document.getElementById("confirmaSenha").value;
 
             if (senha !== confirmacao) {
-                alert("As senhas não coincidem!");
+                cardAviso("As senhas não coincidem!", 1);
                 return;
             }
 
@@ -241,17 +247,17 @@ function esqueciSenha() {
                 const data = await response.json();
 
                 if (response.ok) {
-                    alert("Sucesso! " + data.message);
+                    cardAviso("Sucesso ao alterar a senha!", 1);
                     modal.classList.remove("mostrar");
                     mostrarEtapaEmail(); 
                 } else {
-                    alert("Erro: " + (data.error || "Token inválido ou expirado."));
+                    cardAviso("Token inválido ou expirado.", 1);
                      mostrarEtapaCodigo('seu email'); 
                 }
 
             } catch (error) {
                 console.error(error);
-                alert("Erro ao conectar com o servidor.");
+                cardAviso("Erro ao conectar com o servidor.",1);
             }
         });
     }
