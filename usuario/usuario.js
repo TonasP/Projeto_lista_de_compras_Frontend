@@ -1,3 +1,7 @@
+import cardAviso from "/utilities/cardAviso.js";
+
+const API = 'https://lista-de-compras-api-quvq.onrender.com'
+
 async function inicializarModalUsuario() {
     try {
         
@@ -101,11 +105,15 @@ async function salvarNovaFotoModal() {
             const imgSidebar = document.querySelector('.infoUsuario img');
             if (imgSidebar) imgSidebar.src = `${API}${dados.fotoUrl}`;
             
-            alert("Foto atualizada!");
+            cardAviso("Foto atualizada!",1);
         } else {
-            alert("Erro ao salvar a foto.");
+            cardAviso("Erro ao salvar a foto.",1);
         }
     } catch (erro) {
         console.error("Erro na requisição:", erro);
     }
 }
+window.abrirModalUsuario = abrirModalUsuario
+window.salvarNovaFotoModal = salvarNovaFotoModal
+window.fazerLogout = fazerLogout
+window.fecharModalUsuario = fecharModalUsuario

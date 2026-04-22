@@ -1,10 +1,11 @@
 const API = 'https://lista-de-compras-api-quvq.onrender.com'
+import cardAviso from "/utilities/cardAviso.js";
 
 let paginaAtual = 1
 
 let offset = 0
 
-
+let totalPaginas = 9
 
 
 const limit = 9
@@ -211,7 +212,7 @@ async function deletarItem() {
     const ids = cards.map(item => item.id);
     const token = localStorage.getItem('tokenListaCompras')
     if (ids.length === 0) {
-        alert("Nenhum item selecionado")
+        cardAviso("Nenhum item selecionado",1)
         return
     }
     if (!confirm(`Tem certeza que deseja deletar ${ids.length} itens`)) return
@@ -249,7 +250,7 @@ function adicionarAoStageCatalogo() {
     const categoria = document.getElementById('selectCategoria').value;
 
     if (!nome || nome.trim().length ===0) {
-        alert("Por favor, digite o nome do produto.");
+        cardAviso("Por favor, digite o nome do produto.", 1);
         return;
     }
 
@@ -328,7 +329,7 @@ async function salvarTudoNoCatalogo() {
         // Espera todos serem salvos
         await Promise.all(promessas);
         
-        alert("Todos os produtos foram cadastrados com sucesso!");
+        cardAviso("Todos os produtos foram cadastrados com sucesso!",1);
         
         // Limpeza final
         stageCatalogo = []; // Zera o array global
@@ -338,6 +339,11 @@ async function salvarTudoNoCatalogo() {
 
     } catch (erro) {
         console.error("Erro ao salvar catálogo", erro);
-        alert("Houve um erro ao salvar alguns itens.");
+        cardAviso("Houve um erro ao salvar alguns itens.",1);
     }
 }
+window.abrirModalAdicionar = abrirModalAdicionar;
+window.fecharModalCatalogo = fecharModalCatalogo;
+window.adicionarAoStageCatalogo = adicionarAoStageCatalogo;
+window.removerDoStageCatalogo = removerDoStageCatalogo;
+window.salvarTudoNoCatalogo = salvarTudoNoCatalogo;

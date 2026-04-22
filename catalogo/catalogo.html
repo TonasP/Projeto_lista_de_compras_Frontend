@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="/usuario/usuario.css">
     <script src="/utilities/redirecionarPagina.js" defer></script>
     <script src="/utilities/modalEdicao.js"></script>
-    <script src="catalogo.js" defer></script>
-    <script src="/usuario/usuario.js" defer></script>
+    <script type="module"  src="catalogo.js" defer></script>
+    <script type="module"  src="/usuario/usuario.js" defer></script>
 
 
 </head>
@@ -155,8 +155,7 @@
                             <ul id="listaStageCatalogo">
                             </ul>
                             <div class="modal-actions">
-                                <button onclick="salvarTudoNoCatalogo()" class="btn-finalizar-modal">Salvar Tudo no
-                                    Banco</button>
+                                <button onclick="salvarTudoNoCatalogo()" class="btn-finalizar-modal">Salvar Item(s)</button>
                             </div>
                         </div>
                     </div>
@@ -206,6 +205,7 @@
             </div>
         </div>
     </div>
+    <div class='aviso hidden'></div>
 
 </body>
 

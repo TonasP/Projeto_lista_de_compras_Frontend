@@ -1,7 +1,10 @@
 const API = 'https://lista-de-compras-api-quvq.onrender.com'
 let paginaAtual = 1
+import cardAviso from "/utilities/cardAviso.js";
 
 let offset = 0
+
+let totalPaginas = 6
 
 const limit = 6
 let btnDeletar = document.querySelector('.delete')
@@ -20,19 +23,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 })
 
-async function sectionUsuario(){
+async function sectionUsuario() {
     const token = localStorage.getItem('tokenListaCompras')
-    let response = await fetch(`${API}/usuario/me`,{
-        headers: { 'Authorization': `Bearer ${token}` 
-    }})
+    let response = await fetch(`${API}/usuario/me`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
     let dadosUsuario = await response.json()
-    console.log (dadosUsuario)
+    console.log(dadosUsuario)
     const usuarioSection = document.getElementById('usuarioSection')
-    const caminhoDaImagem = dadosUsuario.foto_perfil 
-            ? `${API}${dadosUsuario.foto_perfil}` 
-            : "../images/account.png";
+    const caminhoDaImagem = dadosUsuario.foto_perfil
+        ? `${API}${dadosUsuario.foto_perfil}`
+        : "../images/account.png";
     usuarioSection.innerHTML +=
-    `
+        `
     <div class="infoUsuario">
                     <img src="${caminhoDaImagem}" alt="Icone com foto do usuario">
                     <h3 id="nomeUsuario">${dadosUsuario.usuario}</h3>
@@ -45,7 +50,7 @@ async function listarItems(pagina) {
     paginaAtual = pagina;
     const offset = (pagina - 1) * limit;
 
-    
+
     const inputBusca = document.getElementById('inputBuscaLista');
 
     const termoBusca = inputBusca ? inputBusca.value : "";
@@ -56,7 +61,7 @@ async function listarItems(pagina) {
 
         let url = `${API}/dicas?limit=${limit}&offset=${offset}`;
 
-        
+
         if (termoBusca) {
             url += `&busca=${encodeURIComponent(termoBusca)}`;
         }
@@ -66,10 +71,10 @@ async function listarItems(pagina) {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
-        
+
         if (response.status === 401 || response.status === 403) {
             console.warn("Sessão expirada");
-             window.location.href = "../login/index.html"; 
+            window.location.href = "../login/index.html";
             return;
         }
 
@@ -94,7 +99,7 @@ async function listarItems(pagina) {
 
     } catch (erro) {
         console.error("Erro CRÍTICO ao listar:", erro);
-        alert("Erro ao carregar lista. Verifique o console (F12).");
+        cardAviso("Erro ao carregar lista.",1);
     }
 }
 
@@ -137,15 +142,15 @@ function mudarPagina(delta) {
     listarItems(novaPagina);
 }
 async function criarCard(itens) {
-    
+
     const idReal = itens.id;
     const titulo = itens.titulo || "Dica Sem Título";
     const produtoNome = itens.produto_nome || "Sem item relacionado";
     const descricao = itens.descricao || "Nenhuma descrição fornecida.";
 
     const listaCards = document.getElementById('lista');
-    
-    
+
+
     listaCards.innerHTML += `
         <div class="cards" id="card-${idReal}" data-id="${idReal}">
             <div class="lateral" id="lateral">
@@ -180,7 +185,7 @@ function abrirModalAdicionar() {
 
 function fecharModal() {
     document.getElementById('modalOverlay').classList.add('hidden');
-    
+
     document.getElementById('inputTituloDica').value = '';
     document.getElementById('inputProdutoDica').value = '';
     document.getElementById('inputDescricaoDica').value = '';
@@ -193,7 +198,7 @@ async function salvarDica() {
 
     // Validação simples
     if (!titulo || !produtoNome || !descricao) {
-        alert("Por favor, preencha todos os campos da dica.");
+        cardAviso("Por favor, preencha todos os campos da dica.",1);
         return;
     }
 
@@ -208,21 +213,21 @@ async function salvarDica() {
             },
             body: JSON.stringify({
                 titulo: titulo,
-                produto_nome: produtoNome, 
+                produto_nome: produtoNome,
                 descricao: descricao
             })
         });
 
         if (response.ok) {
-            alert("Dica salva com sucesso!");
+            cardAviso("Dica salva com sucesso!",1);
             fecharModal();
-            listarItems(1); 
+            listarItems(1);
         } else {
-            alert("Houve um problema ao salvar a dica. Verifique o servidor.");
+            cardAviso("Houve um problema ao salvar a dica, Tente mais tarde",1);
         }
     } catch (erro) {
         console.error("Erro ao salvar dica:", erro);
-        alert("Erro de conexão ao salvar a dica.");
+        cardAviso("Erro de conexão ao salvar a dica.",1);
     }
 }
 function selectCard() {
@@ -255,11 +260,11 @@ function acionarBtnDeleteEAdd() {
 }
 
 function pegarItensSelecionados() {
-    const cardsMarcados = document.querySelectorAll('.cardsChecked'); 
+    const cardsMarcados = document.querySelectorAll('.cardsChecked');
 
     return Array.from(cardsMarcados).map(card => ({
-        id: card.dataset.id,              
-        dica_id: card.dataset.idReal, 
+        id: card.dataset.id,
+        dica_id: card.dataset.idReal,
         titulo: card.dataset.titulo,
         produtoNome: card.dataset.produtoNome,
         descricao: card.dataset.descricao
@@ -271,7 +276,7 @@ async function deletarItem() {
     const ids = cards.map(item => item.id);
     const token = localStorage.getItem('tokenListaCompras')
     if (ids.length === 0) {
-        alert("Nenhum item selecionado")
+        cardAviso("Nenhum item selecionado",1)
         return
     }
     if (!confirm(`Tem certeza que deseja deletar ${ids.length} itens`)) return
@@ -284,3 +289,9 @@ async function deletarItem() {
     }
     listarItems(paginaAtual)
 }
+window.filtrarListaPrincipal = filtrarListaPrincipal;
+window.mudarPagina = mudarPagina;
+window.abrirModalAdicionar = abrirModalAdicionar;
+window.fecharModal = fecharModal;
+window.salvarDica = salvarDica;
+window.deletarItem = deletarItem;
