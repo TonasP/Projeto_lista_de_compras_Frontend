@@ -31,7 +31,7 @@ async function sectionUsuario(){
         headers: { 'Authorization': `Bearer ${token}` 
     }})
     let dadosUsuario = await response.json()
-    console.log (dadosUsuario)
+    // console.log (dadosUsuario)
     const usuarioSection = document.getElementById('usuarioSection')
     const caminhoDaImagem = dadosUsuario.foto_perfil 
             ? `${API}${dadosUsuario.foto_perfil}` 
@@ -64,14 +64,14 @@ async function carregarCategorias(pagina) {
             url += `&busca=${encodeURIComponent(termoBusca)}`;
         }
 
-        console.log("Buscando URL:", url);
+        // console.log("Buscando URL:", url);
 
         const response = await fetch(url, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
         if (response.status === 401 || response.status === 403) {
-            console.warn("Sessão expirada");
+            // console.warn("Sessão expirada");
             return;
         }
 
@@ -95,7 +95,7 @@ async function carregarCategorias(pagina) {
         renderizarPaginacao();
 
     } catch (erro) {
-        console.error("Erro CRÍTICO ao listar:", erro);
+        // console.error("Erro CRÍTICO ao listar:", erro);
     }
 }
 function filtrarListaPrincipal() {
@@ -338,7 +338,7 @@ async function salvarTudoNoCatalogo() {
         carregarCategorias(1); // Recarrega a lista principal na tela
 
     } catch (erro) {
-        console.error("Erro ao salvar catálogo", erro);
+        // console.error("Erro ao salvar catálogo", erro);
         cardAviso("Houve um erro ao salvar alguns itens.",1);
     }
 }
@@ -347,3 +347,5 @@ window.fecharModalCatalogo = fecharModalCatalogo;
 window.adicionarAoStageCatalogo = adicionarAoStageCatalogo;
 window.removerDoStageCatalogo = removerDoStageCatalogo;
 window.salvarTudoNoCatalogo = salvarTudoNoCatalogo;
+window.deletarItem = deletarItem;
+window.filtrarListaPrincipal = filtrarListaPrincipal

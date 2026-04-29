@@ -7,13 +7,13 @@ async function validarToken() {
     const token = localStorage.getItem('tokenListaCompras');
 
     if (!token) {
-        console.warn("Sem token no LocalStorage.");
+        // console.warn("Sem token no LocalStorage.");
         window.location.href = '/login/login.html';
         return false;
     }
 
     try {
-        console.log("Enviando requisição para:", `${API_BASE}/catalogo`);
+        // console.log("Enviando requisição para:", `${API_BASE}/catalogo`);
 
 
         const response = await fetch(`${API_BASE}/lista`, {
@@ -21,7 +21,7 @@ async function validarToken() {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
-        console.log("Status da API:", response.status);
+        // console.log("Status da API:", response.status);
 
         if (response.status === 401 || response.status === 403) {
             alert("Sessão expirada (Erro 401). Faça login novamente.");
@@ -35,7 +35,7 @@ async function validarToken() {
 
     } catch (erro) {
         alert("Erro técnico ao validar token: " + erro.message);
-        console.error(erro);
+        // console.error(erro);
         return false; 
     }
 }

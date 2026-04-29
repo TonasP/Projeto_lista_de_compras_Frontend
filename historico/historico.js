@@ -16,7 +16,7 @@ async function sectionUsuario(){
         headers: { 'Authorization': `Bearer ${token}` 
     }})
     let dadosUsuario = await response.json()
-    console.log (dadosUsuario)
+    // console.log (dadosUsuario)
     const usuarioSection = document.getElementById('usuarioSection')
     const caminhoDaImagem = dadosUsuario.foto_perfil 
             ? `${API}${dadosUsuario.foto_perfil}` 
@@ -56,7 +56,7 @@ async function carregarGraficoPrincipal() {
         });
 
         if (!response.ok) {
-            console.error(`Erro da API: Status ${response.status}`);
+            // console.error(`Erro da API: Status ${response.status}`);
             return;
         }
 
@@ -67,7 +67,7 @@ async function carregarGraficoPrincipal() {
 
         renderizarGrafico(nomesProdutos, totais, tempo);
     } catch (erro) {
-        console.error("Erro ao buscar dados do gráfico", erro);
+        // console.error("Erro ao buscar dados do gráfico", erro);
     }
 }
 
@@ -125,7 +125,7 @@ async function buscarDetalhesProduto(produtoNome, tempo) {
         });
 
         if (!response.ok) {
-            console.error(`Erro da API: Status ${response.status}`);
+            // console.error(`Erro da API: Status ${response.status}`);
             return;
         }
 
@@ -162,6 +162,6 @@ async function buscarDetalhesProduto(produtoNome, tempo) {
         areaDetalhes.classList.remove('hidden');
 
     } catch (erro) {
-        console.error("Erro ao buscar detalhes do produto", erro);
+        // console.error("Erro ao buscar detalhes do produto", erro);
     }
 }

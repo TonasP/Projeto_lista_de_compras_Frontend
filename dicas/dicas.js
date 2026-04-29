@@ -31,7 +31,7 @@ async function sectionUsuario() {
         }
     })
     let dadosUsuario = await response.json()
-    console.log(dadosUsuario)
+    // console.log(dadosUsuario)
     const usuarioSection = document.getElementById('usuarioSection')
     const caminhoDaImagem = dadosUsuario.foto_perfil
         ? `${API}${dadosUsuario.foto_perfil}`
@@ -73,7 +73,7 @@ async function listarItems(pagina) {
 
 
         if (response.status === 401 || response.status === 403) {
-            console.warn("Sessão expirada");
+            // console.warn("Sessão expirada");
             window.location.href = "../login/index.html";
             return;
         }
@@ -98,7 +98,7 @@ async function listarItems(pagina) {
         renderizarPaginacao();
 
     } catch (erro) {
-        console.error("Erro CRÍTICO ao listar:", erro);
+        // console.error("Erro CRÍTICO ao listar:", erro);
         cardAviso("Erro ao carregar lista.",1);
     }
 }
@@ -226,7 +226,7 @@ async function salvarDica() {
             cardAviso("Houve um problema ao salvar a dica, Tente mais tarde",1);
         }
     } catch (erro) {
-        console.error("Erro ao salvar dica:", erro);
+        // console.error("Erro ao salvar dica:", erro);
         cardAviso("Erro de conexão ao salvar a dica.",1);
     }
 }

@@ -105,7 +105,7 @@ async function salvarEdicao() {
         fecharModalEdicao();
 
     } catch (erro) {
-        console.error("Erro ao salvar edição:", erro);
+        // console.error("Erro ao salvar edição:", erro);
         alert("Houve um erro ao atualizar os dados.");
     }
 }

@@ -11,7 +11,7 @@ async function inicializarModalUsuario() {
        
         document.body.insertAdjacentHTML('beforeend', html);
     } catch (erro) {
-        console.error("Erro ao carregar o modal de usuário:", erro);
+        // console.error("Erro ao carregar o modal de usuário:", erro);
     }
 }
 
@@ -110,7 +110,7 @@ async function salvarNovaFotoModal() {
             cardAviso("Erro ao salvar a foto.",1);
         }
     } catch (erro) {
-        console.error("Erro na requisição:", erro);
+        // console.error("Erro na requisição:", erro);
     }
 }
 window.abrirModalUsuario = abrirModalUsuario

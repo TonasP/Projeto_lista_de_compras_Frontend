@@ -18,7 +18,7 @@ async function fazerLogin() {
             return
         }
 
-        console.log("Enviando para:", `${API}/usuario/login`);
+        // console.log("Enviando para:", `${API}/usuario/login`);
         const response = await fetch(`${API}/usuario/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -35,7 +35,7 @@ async function fazerLogin() {
         }
     }
     catch (error) {
-        console.error("Erro no login:", error)
+        // console.error("Erro no login:", error)
     }
 }
 
@@ -110,7 +110,7 @@ function iniciarModalCadastro() {
                 return
             }
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             
         }
     });
@@ -176,7 +176,7 @@ function esqueciSenha() {
                     btn.disabled = false;
                 }
             } catch (error) {
-                console.error(error);
+                // console.error(error);
                 cardAviso("Erro de conexão.", 1);
                 btn.innerText = "Enviar Token";
                 btn.disabled = false;
@@ -256,7 +256,7 @@ function esqueciSenha() {
                 }
 
             } catch (error) {
-                console.error(error);
+                // console.error(error);
                 cardAviso("Erro ao conectar com o servidor.",1);
             }
         });

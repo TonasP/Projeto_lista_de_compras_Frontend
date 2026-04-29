@@ -51,7 +51,7 @@ async function listarItems(pagina) {
 
         
         if (response.status === 401 || response.status === 403) {
-             console.warn("Sessão expirada");
+             // console.warn("Sessão expirada");
              
              return;
         }
@@ -76,7 +76,7 @@ async function listarItems(pagina) {
         renderizarPaginacao();
 
     } catch (erro) {
-        console.error("Erro CRÍTICO ao listar:", erro);
+        // console.error("Erro CRÍTICO ao listar:", erro);
         cardAviso("Erro ao carregar lista",1);
     }
 }
@@ -228,7 +228,7 @@ async function abrirModalAdicionar() {
         catalogoCompleto = await response.json();
         renderizarCatalogo(catalogoCompleto.itens);
     } catch (erro) {
-        console.error("Erro ao buscar catálogo", erro);
+        // console.error("Erro ao buscar catálogo", erro);
         cardAviso("Erro ao carregar itens do catálogo.",1);
     }
 }
@@ -257,7 +257,7 @@ function renderizarCatalogo(lista) {
 
 function filtrarCatalogo() {
     const termo = document.getElementById('inputBuscaCatalogo').value.toLowerCase();
-    const filtrados = catalogoCompleto.filter(item =>
+    const filtrados = catalogoCompleto.itens.filter(item =>
         item.nome.toLowerCase().includes(termo) ||
         item.categoria.toLowerCase().includes(termo)
     );
@@ -292,7 +292,7 @@ function confirmarItemNoStage() {
     const obs = document.getElementById('inputObs').value;
 
     if (qtdValor.trim('').length === 0 || qtdValor <=0) {
-        console.log(qtdValor)
+        // console.log(qtdValor)
         unidade= 'un'
     }
 
@@ -365,7 +365,7 @@ async function salvarTudoNoBanco() {
         fecharModal();
         listarItems();
     } catch (erro) {
-        console.log("Erro ao salvar itens", erro.message);
+        // console.log("Erro ao salvar itens", erro.message);
         cardAviso("Houve um erro ao salvar alguns itens.",1);
     }
 }
@@ -420,8 +420,8 @@ async function finalizarCompra() {
                 data_compra: new Date(),
                 comentario: item.comentario || ""
             };
-            console.log(corpoDaRequisicao)
-            console.log(item.id)
+            // console.log(corpoDaRequisicao)
+            // console.log(item.id)
 
             await fetch(`${API}/lista/${item.id}`, {
                 method: 'PUT',
@@ -433,7 +433,7 @@ async function finalizarCompra() {
             });
 
         } catch (erro) {
-            console.error(`Erro ao finalizar item ${item.id}`, erro);
+            // console.error(`Erro ao finalizar item ${item.id}`, erro);
         }
     }
 
